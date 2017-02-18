@@ -1,0 +1,97 @@
+<div class="header"><h3>Downloads</h3></div>
+<ngx-datatable
+    class='material'
+    [rows]='downloads'
+    [headerHeight]="50"
+    [footerHeight]="0"
+    [scrollbarV]="false"
+    [scrollbarH]="true">
+
+    <ngx-datatable-column prop="name" name="Name" [minWidth]="150" [canAutoResize]="false"></ngx-datatable-column>
+    <ngx-datatable-column prop="size" name="Size" [canAutoResize]="false">
+        <template let-value="value" ngx-datatable-cell-template>
+            {{ value | fileSize }}
+        </template>
+    </ngx-datatable-column>
+    <ngx-datatable-column class="column" prop="progress" name="Progress" [canAutoResize]="false">
+        <template let-value="value" ngx-datatable-cell-template>
+            <div class="progress">
+                <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar"
+                    [attr.aria-valuenow]="value" aria-valuemin="0" aria-valuemax="1"
+                    [style.width]="(value)*100 + '%'">
+                    {{ value * 100 | number:'1.0-1' }}%
+                </div>
+            </div>
+        </template>
+    </ngx-datatable-column>
+    <ngx-datatable-column prop="status" name="Status" [canAutoResize]="false">
+        <template let-value="value" ngx-datatable-cell-template>
+            {{ value | slice:9 | lowercase }}
+        </template>
+    </ngx-datatable-column>
+    <ngx-datatable-column prop="speed_down" name="&darr; Speed" [canAutoResize]="false">
+        <template let-value="value" ngx-datatable-cell-template>
+            {{ value | fileSize:1 }}/s
+        </template>
+    </ngx-datatable-column>
+    <ngx-datatable-column prop="speed_up" name="&uarr; Speed" [canAutoResize]="false">
+        <template let-value="value" ngx-datatable-cell-template>
+            {{ value | fileSize:1 }}/s
+        </template>
+    </ngx-datatable-column>
+    <ngx-datatable-column prop="num_seeds" name="Seeds" [canAutoResize]="false"></ngx-datatable-column>
+    <ngx-datatable-column prop="num_peers" name="Peers" [canAutoResize]="false"></ngx-datatable-column>
+    <ngx-datatable-column prop="hops" name="Hops" [canAutoResize]="false"></ngx-datatable-column>
+    <ngx-datatable-column name="Actions">
+        <template let-value="value" ngx-datatable-cell-template>
+            <i class="fa fa-play"></i>
+            <i class="fa fa-stop"></i>
+            <i class="fa fa-remove"></i>
+        </template>
+    </ngx-datatable-column>
+</ngx-datatable>
+
+
+
+<!--<div class="header"><h3>Downloads</h3></div>
+<table class="table borderless">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Size</th>
+            <th>Progress</th>
+            <th>Status</th>
+            <th>&darr; Speed</th>
+            <th>&uarr; Speed</th>
+            <th>Seeds/peers</th>
+            <th>Hops</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let download of downloads">
+            <td>{{ download.name }}</td>
+            <td>{{ download.size | fileSize }}</td>
+            <td>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar"
+                        [attr.aria-valuenow]="download.progress" aria-valuemin="0" aria-valuemax="1"
+                        [style.width]="(download.progress)*100 + '%'">
+                        {{ download.progress * 100 | number:'1.0-1' }}%
+                    </div>
+                </div>
+
+            </td>
+            <td>{{ download.status | slice:9 | lowercase }}</td>
+            <td>{{ download.speed_down | fileSize:1 }}/s</td>
+            <td>{{ download.speed_up | fileSize:1 }}/s</td>
+            <td>{{ download.num_seeds }} / {{ download.num_peers }}</td>
+            <td>{{ download.hops }}</td>
+            <td>
+                <i class="fa fa-play"></i>
+                <i class="fa fa-stop"></i>
+                <i class="fa fa-remove"></i>
+            </td>
+        </tr>
+    </tbody>
+</table>-->

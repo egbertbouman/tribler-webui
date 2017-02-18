@@ -1,0 +1,41 @@
+<div class="wrapper">
+    <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <div class="navbar-brand">
+                    <a class="btn btn-gray" href="#"><i class="fa fa-bars fa-lg"></i></a>
+                    Tribler
+                </div>
+            </div>
+            <form class="navbar-form">
+                <div class="form-group" style="display:inline;">
+                    <div class="input-group" style="display:table;">
+                    <input id="search-query" class="form-control" placeholder="Search for your favorite content" ng-model="query">
+                    <span class="input-group-btn" style="width:1%;">
+                        <button id="search-button" class="btn btn-default" type="button" ng-click="search()">Go!</button>
+                    </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+
+    <div class="row full-height" style="width:100%;margin:0px;">
+        <div class="col-sm-3 menu">
+            <ul class="nav nav-pills nav-stacked xs-collapse">
+                <li><a class="list-group-item" [routerLink]="['home']" routerLinkActive="active"><i class="fa fa-home"></i> Home</a></li>
+                <li><a class="list-group-item" [routerLink]="['channels']" routerLinkActive="active"><i class="fa fa-globe"></i> Discovered</a></li>
+                <li><a class="list-group-item" [routerLink]="['mychannel']" routerLinkActive="active"><i class="fa fa-share-alt"></i> My Channel</a></li>
+                <li><a class="list-group-item" [routerLink]="['subscriptions']" routerLinkActive="active"><i class="fa fa-heart"></i> Subscriptions</a></li>
+                <li><a class="list-group-item" [routerLink]="['downloads']" routerLinkActive="active"><i class="fa fa-arrow-down"></i> Downloads</a></li>
+                <li><a class="list-group-item" [routerLink]="['videoplayer']" routerLinkActive="active"><i class="fa fa-play"></i> Video Player</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 no-padding">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="row listitem">
+    <div class="col-xs-1">
+        <div class="color-box" randomBackgroundColor>{{ torrent.name | abbreviate }}</div>
+    </div>
+    <div class="col-xs-5">
+        <div class="row hide-overflow">
+            <div class="badge badge-outline">torrent</div> {{ torrent.name }}
+        </div>
+        <div class="row">
+            Size {{ (torrent.size || 0) | fileSize }}
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="badge badge-outline pull-right" (click)="play()"><div class="fa fa-play"></div></div>
+        <div class="badge badge-outline pull-right" (click)="staticModal.show()"><div class="fa fa-arrow-down"></div></div>
+    </div>
+</div>
+
+ 
+<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">Download torrent</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label class="control-label">Destination</label>
+                        <input type="text" class="form-control" placeholder="Leave empty for default" popover-is-open="name_popover" popover-trigger="none" [(ngModel)]="location" [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Number of anonymous hops</label><br>
+                        <input type="number" value="1" min="0" max="3" [(ngModel)]="hops" [ngModelOptions]="{standalone: true}">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" (click)="staticModal.hide()">Cancel</button>
+                <button type="button" class="btn btn-primary" (click)="download()">Download</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -9,6 +9,8 @@ import { Channel } from './channel.model';
 import { Playlist } from './playlist.model';
 import { Download } from './download.model';
 
+declare var EventSource: any;
+
 @Injectable()
 export class TriblerService {
     private _api_base = '//localhost:8085';
@@ -71,5 +73,16 @@ export class TriblerService {
     searchCompletions(term: string): Observable<Download[]> {
         return this._http.get(this._api_base + `/search/completions?q=${term}`)
             .map(res => res.json().completions);
+    }
+
+    getEvents(): Observable<any[]> {
+        return Observable.create(observer => {
+            const eventSource = new EventSource(this._api_base + '/events');
+            eventSource.onmessage = x => observer.next(JSON.parse(x.data));
+            eventSource.onerror = x => observer.error(JSON.parse(x));
+            return () => {
+                eventSource.close();
+            };
+        });
     }
 }

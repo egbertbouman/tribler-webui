@@ -7,6 +7,7 @@ import { InfiniteScrollModule  } from 'angular2-infinite-scroll';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ProgressbarModule } from 'ng2-bootstrap/progressbar';
 import { ModalModule } from 'ng2-bootstrap/modal';
+import { TypeaheadModule } from 'ng2-bootstrap/typeahead';
 
 import { FileSizePipe } from './file-size.pipe';
 import { AbbreviatePipe } from './abbreviate.pipe';
@@ -22,6 +23,7 @@ import { TorrentListItemComponent } from './list/torrent-list-item.component';
 import { ChannelListItemComponent } from './list/channel-list-item.component';
 import { ListComponent } from './list/list.component';
 import { RandomBackgroundColorDirective } from './random-background-color.directive';
+import { SearchbarComponent } from './search/searchbar.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -49,7 +51,8 @@ const routes: Routes = [
     FileSizePipe,
     AbbreviatePipe,
     ListComponent,
-    RandomBackgroundColorDirective
+    RandomBackgroundColorDirective,
+    SearchbarComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +62,8 @@ const routes: Routes = [
     InfiniteScrollModule,
     NgxDatatableModule,
     ProgressbarModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    TypeaheadModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

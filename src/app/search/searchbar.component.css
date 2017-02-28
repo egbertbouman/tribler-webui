@@ -1,0 +1,12 @@
+.navbar {
+    background-color: #222;
+    margin-bottom: 0px;
+    border-bottom: 1px solid black;
+}
+.navbar-brand, .navbar-brand:hover {
+    color: coral !important;
+    font-size: x-large !important;
+}
+.btn-gray {
+    color: #aaa;
+}

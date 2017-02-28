@@ -18,24 +18,12 @@
     border-right: 1px solid black;
     padding: 10px 0px;
 }
-.navbar {
-    background-color: #222;
-    margin-bottom: 0px;
-    border-bottom: 1px solid black;
-}
 .wrapper {
     background-color: #282828 !important;
     color: #fff;
 }
 .full-height, .wrapper, .menu {
     height: 100%;
-}
-.navbar-brand, .navbar-brand:hover {
-    color: coral !important;
-    font-size: x-large !important;
-}
-.btn-gray {
-    color: #aaa;
 }
 .no-padding {
     padding: 0px;

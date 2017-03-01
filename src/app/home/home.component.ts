@@ -5,9 +5,8 @@ import { Observable } from 'rxjs/Rx';
 declare var EventSource: any
 
 @Component({
-    selector: 'app-home',
-    template: `<list [title]="'Recommended for you'" [items]="items"></list>`,
-    providers: [TriblerService]
+    selector: 'home',
+    template: `<list [title]="'Recommended for you'" [items]="items"></list>`
 })
 export class HomeComponent implements OnInit {
     items = [];
@@ -20,8 +19,5 @@ export class HomeComponent implements OnInit {
              .subscribe(torrents => this.items = this.items.concat(torrents));
          this._triblerService.getPopularChannels()
              .subscribe(channels => this.items = this.items.concat(channels));
-
-         this._triblerService.getEvents()
-             .subscribe(event => console.log(event));
     }
 }

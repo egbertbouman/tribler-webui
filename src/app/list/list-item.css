@@ -2,12 +2,14 @@
     border-bottom: 1px solid black;
     margin: 0px;
     padding: 3px 10px !important;
-    cursor: pointer;
     color: #ccc;
     text-overflow: hidden;
 }
 .listitem .row {
     padding: 3px 0px;
+}
+.clickable {
+    cursor: pointer;
 }
 .badge-outline {
     font-weight: normal;

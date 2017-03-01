@@ -7,10 +7,9 @@ import { FileSizePipe } from '../file-size.pipe';
 import { TriblerService } from '../shared/tribler.service';
 
 @Component({
-    selector: 'app-downloads',
+    selector: 'downloads',
     templateUrl: './downloads.component.html',
-    styleUrls: ['./downloads.component.css'],
-    providers: [TriblerService]
+    styleUrls: ['./downloads.component.css']
 })
 export class DownloadsComponent implements OnInit {
     downloads = [];

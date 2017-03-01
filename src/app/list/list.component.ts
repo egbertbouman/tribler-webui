@@ -11,7 +11,7 @@ export class ListComponent implements OnInit {
     @Input() items = [];
     @Input() showBackButton = false;
 
-    itemsShown = [];
+    itemsMaxShown = 20;
     throttle = 300;
     scrollDistance = 2;
 
@@ -19,33 +19,23 @@ export class ListComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.initalItems();
-    }
-
-    initalItems() {
-        this.itemsShown = [];
-        this.addItems(0, Math.min(this.items.length, 100));
-    }
-
-    addItems(startIndex, endIndex) {
-        startIndex = Math.min(startIndex, this.items.length);
-        endIndex = Math.min(endIndex, this.items.length);
-
-        for (let i = startIndex; i < endIndex; ++i) {
-            this.itemsShown.push(this.items[i]);
-        }
     }
 
     ngOnChanges() {
-        this.initalItems();
+        this.itemsMaxShown = 20;
     }
 
     onScrollDown() {
         // Add another 20 items
-        this.addItems(this.itemsShown.length, this.itemsShown.length + 20);
+        this.itemsMaxShown = Math.max(this.itemsMaxShown, this.itemsMaxShown + 20);
     }
 
     back() {
         this._location.back();
+    }
+
+    trackByFn(index, item) {
+        //console.log('TRACKBY!!!!!!!!!!!!! '+index + ' ' + item);
+        return index; // or item.id
     }
 }

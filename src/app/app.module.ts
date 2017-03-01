@@ -24,10 +24,12 @@ import { ChannelListItemComponent } from './list/channel-list-item.component';
 import { ListComponent } from './list/list.component';
 import { RandomBackgroundColorDirective } from './random-background-color.directive';
 import { SearchbarComponent } from './search/searchbar.component';
+import { SearchresultsComponent } from './search/searchresults.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
+    { path: 'search', component: SearchresultsComponent },
     { path: 'channels', component: AllChannelComponent },
     { path: 'channels/:id', component: ChannelComponent },
     { path: 'mychannel', component: MyChannelComponent },
@@ -52,7 +54,8 @@ const routes: Routes = [
     AbbreviatePipe,
     ListComponent,
     RandomBackgroundColorDirective,
-    SearchbarComponent
+    SearchbarComponent,
+    SearchresultsComponent
   ],
   imports: [
     BrowserModule,

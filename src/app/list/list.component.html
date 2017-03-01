@@ -1,11 +1,16 @@
-<div class="listheader"><h3><span *ngIf="showBackButton" class="fa fa-chevron-left back" (click)="back()"> </span>{{ title }} <small class="pull-right">showing: {{ itemsShown.length }}/{{ items.length }}</small></h3></div>
+<div class="listheader">
+    <h3>
+        <span *ngIf="showBackButton" class="fa fa-chevron-left back" (click)="back()"> </span>
+        {{ title }} <small class="pull-right">showing: {{ itemsMaxShown }}/{{ items.length }}</small>
+    </h3>
+</div>
 <div infinite-scroll
     [infiniteScrollDistance]="scrollDistance"
     [infiniteScrollThrottle]="throttle"
     (scrolled)="onScrollDown()">
 
-    <div *ngFor="let item of itemsShown">
-        <div [ngSwitch]="item.type">
+    <div *ngFor="let item of items; let i=index; trackBy: trackByFn">
+        <div *ngIf="i < itemsMaxShown" [ngSwitch]="item.type">
             <torrent-item *ngSwitchCase="'torrent'" [torrent]="item"></torrent-item>
             <channel-item *ngSwitchCase="'channel'" [channel]="item"></channel-item>
         </div>

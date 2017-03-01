@@ -14,8 +14,15 @@ declare var EventSource: any;
 @Injectable()
 export class TriblerService {
     private _api_base = '//localhost:8085';
+    searchResults = [];
+    searchQuery$;
+    _searchQueryObserver;
 
     constructor(private _http: Http) {
+        this.getEvents().subscribe();
+        this.searchQuery$ = new Observable(observer => {
+            this._searchQueryObserver = observer;
+        }).share();
     }
 
     addType(objects: any[], type: string) {
@@ -71,18 +78,54 @@ export class TriblerService {
     }
 
     searchCompletions(term: string): Observable<Download[]> {
-        return this._http.get(this._api_base + `/search/completions?q=${term}`)
+        return this._http.get(this._api_base + `/search/completions?q=${encodeURI(term)}`)
             .map(res => res.json().completions);
     }
+    search(term: string): Observable<Download[]> {
+        console.log(this.searchResults.length);
+        console.log('CLEAR!');
+        this._searchQueryObserver.next(term);
+        //this.searchQuery = term;
+        // Clear the old search results
+        this.searchResults.length = 0;
+        while(this.searchResults.length > 0) {
+           this.searchResults.pop();
+        }
+        return this._http.get(this._api_base + `/search?q=${term}`)
+            .map(res => res.json());
+    }
+
 
     getEvents(): Observable<any[]> {
+        console.log('events');
         return Observable.create(observer => {
             const eventSource = new EventSource(this._api_base + '/events');
-            eventSource.onmessage = x => observer.next(JSON.parse(x.data));
+            eventSource.onmessage = x => observer.next(this._processEvent(JSON.parse(x.data)));
             eventSource.onerror = x => observer.error(JSON.parse(x));
             return () => {
                 eventSource.close();
             };
         });
+    }
+    _processEvent(json) {
+        console.log(json);
+        switch (json.type) {
+            case'search_result_channel':
+              var channel = json.event.result;
+              channel.type = 'channel';
+              this.searchResults.push(channel);
+              break;
+            case'search_result_torrent':
+              var torrent = json.event.result;
+              torrent.type = 'torrent';
+              this.searchResults.push(torrent);
+              break;
+            case'channel_discovered':
+              console.log('channel_discovered');
+              break;
+            case'torrent_discovered':
+              console.log('torrent_discovered');
+              break;
+        }
     }
 }

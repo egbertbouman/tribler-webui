@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { TriblerService } from '../shared/tribler.service';
 
 @Component({
-    selector: 'app-subscriptions',
-    template: `<list [title]="'Subscribed channels'" [items]="channels"></list>`,
-    providers: [TriblerService]
+    selector: 'subscriptions',
+    template: `<list [title]="'Subscribed channels'" [items]="channels"></list>`
 })
 export class SubscriptionsComponent implements OnInit {
     channels = [];

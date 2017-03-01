@@ -8,9 +8,7 @@ import { TriblerService } from '../shared/tribler.service';
 @Component({
     selector: 'torrent-item',
     templateUrl: './torrent-list-item.component.html',
-    styleUrls: ['./list-item.css'],
-    providers: [TriblerService]
-
+    styleUrls: ['./list-item.css']
 })
 export class TorrentListItemComponent {
     @Input() torrent: Torrent;

@@ -4,15 +4,15 @@
     </div>
     <div class="col-xs-5">
         <div class="row hide-overflow">
-            <div class="badge badge-outline">torrent</div> {{ torrent.name }}
+            <div class="badge badge-outline">{{ torrent.category | lowercase }}</div> {{ torrent.name }}
         </div>
         <div class="row">
             Size {{ (torrent.size || 0) | fileSize }}
         </div>
     </div>
     <div class="col-xs-6">
-        <div class="badge badge-outline pull-right" (click)="play()"><div class="fa fa-play"></div></div>
-        <div class="badge badge-outline pull-right" (click)="staticModal.show()"><div class="fa fa-arrow-down"></div></div>
+        <div class="badge badge-outline pull-right clickable" (click)="play()"><div class="fa fa-play"></div></div>
+        <div class="badge badge-outline pull-right clickable" (click)="staticModal.show()"><div class="fa fa-arrow-down"></div></div>
     </div>
 </div>
 

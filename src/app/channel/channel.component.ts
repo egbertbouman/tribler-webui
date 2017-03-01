@@ -4,9 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { TriblerService } from '../shared/tribler.service';
 
 @Component({
-    selector: 'app-channel',
-    template: `<list [showBackButton]="true" [title]="overview?.name" [items]="items"></list>`,
-    providers: [TriblerService]
+    selector: 'channel',
+    template: `<list [showBackButton]="true" [title]="overview?.name" [items]="items"></list>`
 })
 export class ChannelComponent implements OnInit {
     overview;

@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Table styles */
+.ngx-datatable .datatable-header, .ngx-datatable .datatable-body-row {
+    margin: 0 10px;
+}
+.ngx-datatable, .ngx-datatable .datatable-body {
+    position: absolute; top:0;left:0;right:0;bottom:0;
+}

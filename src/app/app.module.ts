@@ -3,11 +3,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
-import { InfiniteScrollModule  } from 'angular2-infinite-scroll';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { ProgressbarModule } from 'ng2-bootstrap/progressbar';
-import { ModalModule } from 'ng2-bootstrap/modal';
-import { TypeaheadModule } from 'ng2-bootstrap/typeahead';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// import { ProgressbarModule } from 'ng2-bootstrap/progressbar';
+// import { ModalModule } from 'ng2-bootstrap/modal';
+// import { TypeaheadModule } from 'ng2-bootstrap/typeahead';
 
 import { FileSizePipe } from './file-size.pipe';
 import { AbbreviatePipe } from './abbreviate.pipe';
@@ -64,9 +65,10 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     InfiniteScrollModule,
     NgxDatatableModule,
-    ProgressbarModule.forRoot(),
-    ModalModule.forRoot(),
-    TypeaheadModule.forRoot()
+    NgbModule.forRoot()
+    // ProgressbarModule.forRoot(),
+    // ModalModule.forRoot(),
+    // TypeaheadModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -39,3 +39,10 @@
     margin: 0;
     position: absolute;
 }
+.ngx-datatable.material .datatable-header {
+    margin: 0 10px !important;
+}
+
+.ngx-datatable.material .datatable-header {
+    margin:10px;
+}

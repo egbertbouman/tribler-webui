@@ -1,5 +1,5 @@
 <div class="row listitem clickable" [routerLink]="['/channels', channel.dispersy_cid]">
-  <div class="col-xs-6">
+  <div class="col-sm">
       <div class="row hide-overflow">
           <div class="badge badge-outline">channel</div> {{channel.name}}
       </div>
@@ -7,7 +7,7 @@
           {{channel.torrents}} items
       </div>
   </div>
-  <div class="col-xs-6">
+  <div class="col-xs">
       <div class="pull-right"><div class="fa fa-heart" [class.subscribed]="channel.subscribed"></div><small> {{ channel.votes }} votes</small></div>
   </div>
 </div>

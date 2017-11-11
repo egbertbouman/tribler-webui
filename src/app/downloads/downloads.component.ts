@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ProgressbarModule, ProgressbarConfig } from 'ng2-bootstrap/ng2-bootstrap';
+//import { ProgressbarModule, ProgressbarConfig } from 'ng2-bootstrap/ng2-bootstrap';
 import { Observable } from 'rxjs/Rx';
 
 import { FileSizePipe } from '../file-size.pipe';

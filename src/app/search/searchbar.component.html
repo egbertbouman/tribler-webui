@@ -1,24 +1,18 @@
-<nav class="navbar navbar-inverse navbar-static-top">
-  <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-          <div class="navbar-brand">
-              <a class="btn btn-gray" href="#"><i class="fa fa-bars fa-lg"></i></a>
-              Tribler
-          </div>
-      </div>
-      <div class="navbar-form">
-          <div class="form-group" style="display:inline;">
-              <div class="input-group" style="display:table;">
-              <input [(ngModel)]="query" [typeahead]="dataSource"
-                     [typeaheadWaitMs]="300" [typeaheadOptionsLimit]="7"
-                     (keyup.enter)="search()" class="form-control"
-                     placeholder="Search for your favorite content">
-              <span class="input-group-btn" style="width:1%;">
-                  <button (click)="search()" class="btn btn-default" type="button">Go!</button>
-              </span>
-              </div>
-          </div>
-      </div>
-  </div>
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+    <a class="btn btn-gray" href="#">
+        <i class="fa fa-bars fa-lg"></i>
+    </a>
+    <a class="navbar-brand" href="#">Tribler</a>
+    <form class="form-inline">
+        <div class="input-group">
+            <input [(ngModel)]="query" [ngModelOptions]="{standalone: true}"
+                   [ngbTypeahead]="completions" type="search" class="form-control"
+                   (keyup.enter)="search()" placeholder="Search for your favorite content">
+            <span class="input-group-btn">
+                <button class="btn btn-primary" type="button" (click)="search()">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Go!
+                </button>
+            </span>
+        </div>
+    </form>
 </nav>

@@ -9,12 +9,12 @@
 
     <ngx-datatable-column prop="name" name="Name" [minWidth]="150" [canAutoResize]="false"></ngx-datatable-column>
     <ngx-datatable-column prop="size" name="Size" [canAutoResize]="false">
-        <template let-value="value" ngx-datatable-cell-template>
+        <ng-template let-value="value" ngx-datatable-cell-template>
             {{ value | fileSize }}
-        </template>
+        </ng-template>
     </ngx-datatable-column>
     <ngx-datatable-column class="column" prop="progress" name="Progress" [canAutoResize]="false">
-        <template let-value="value" ngx-datatable-cell-template>
+        <ng-template let-value="value" ngx-datatable-cell-template>
             <div class="progress">
                 <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar"
                     [attr.aria-valuenow]="value" aria-valuemin="0" aria-valuemax="1"
@@ -22,35 +22,34 @@
                     {{ value * 100 | number:'1.0-1' }}%
                 </div>
             </div>
-        </template>
+        </ng-template>
     </ngx-datatable-column>
     <ngx-datatable-column prop="status" name="Status" [canAutoResize]="false">
-        <template let-value="value" ngx-datatable-cell-template>
+        <ng-template let-value="value" ngx-datatable-cell-template>
             {{ value | slice:9 | lowercase }}
-        </template>
+        </ng-template>
     </ngx-datatable-column>
     <ngx-datatable-column prop="speed_down" name="&darr; Speed" [canAutoResize]="false">
-        <template let-value="value" ngx-datatable-cell-template>
+        <ng-template let-value="value" ngx-datatable-cell-template>
             {{ value | fileSize:1 }}/s
-        </template>
+        </ng-template>
     </ngx-datatable-column>
     <ngx-datatable-column prop="speed_up" name="&uarr; Speed" [canAutoResize]="false">
-        <template let-value="value" ngx-datatable-cell-template>
+        <ng-template let-value="value" ngx-datatable-cell-template>
             {{ value | fileSize:1 }}/s
-        </template>
+        </ng-template>
     </ngx-datatable-column>
     <ngx-datatable-column prop="num_seeds" name="Seeds" [canAutoResize]="false"></ngx-datatable-column>
     <ngx-datatable-column prop="num_peers" name="Peers" [canAutoResize]="false"></ngx-datatable-column>
     <ngx-datatable-column prop="hops" name="Hops" [canAutoResize]="false"></ngx-datatable-column>
     <ngx-datatable-column name="Actions">
-        <template let-value="value" ngx-datatable-cell-template>
+        <ng-template let-value="value" ngx-datatable-cell-template>
             <i class="fa fa-play"></i>
             <i class="fa fa-stop"></i>
             <i class="fa fa-remove"></i>
-        </template>
+        </ng-template>
     </ngx-datatable-column>
 </ngx-datatable>
-
 
 
 <!--<div class="header"><h3>Downloads</h3></div>

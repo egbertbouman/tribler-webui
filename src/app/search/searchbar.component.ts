@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
 
 import { TriblerService } from '../shared/tribler.service';
 
@@ -9,28 +13,33 @@ import { TriblerService } from '../shared/tribler.service';
     styleUrls: ['./searchbar.component.css']
 })
 export class SearchbarComponent implements OnInit {
-    dataSource: Observable<any>;
-    query: string;
+    public query: string;
 
-    constructor(private _triblerService: TriblerService) {
-        this.dataSource = Observable.create((observer: any) => {
-            this._triblerService.searchCompletions(this.query).subscribe((result: any) => {
-                if (result.length > 0) {
-                    result.unshift(this.query);
-                }
-                observer.next(result);
-            })
-        });
+    completions = (text$: Observable<string>) =>
+        text$
+            .debounceTime(300)
+            .distinctUntilChanged()
+            .switchMap(term =>
+                this._triblerService.searchCompletions(term)
+                    .catch(() => {
+                        return Observable.of([]);
+                    })
+                    .map((completions: any) => [term].concat(completions))
+            );
+
+
+    constructor(private _triblerService: TriblerService,
+                private _router: Router) {
     }
 
     ngOnInit() {
-        //this._triblerService.getEvents().subscribe();
     }
 
     search() {
+        this._router.navigateByUrl("/search");
         this._triblerService.search(this.query).subscribe(
-      data => console.log(data),
-         error => console.log(error)
+            data => console.log(data),
+            error => console.log(error)
 
         );
     }

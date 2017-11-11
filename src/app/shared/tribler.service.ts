@@ -1,6 +1,7 @@
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
@@ -16,13 +17,10 @@ export class TriblerService {
     private _api_base = '//localhost:8085';
     searchResults = [];
     searchQuery$;
-    _searchQueryObserver;
 
     constructor(private _http: Http) {
         this.getEvents().subscribe();
-        this.searchQuery$ = new Observable(observer => {
-            this._searchQueryObserver = observer;
-        }).share();
+        this.searchQuery$ = new ReplaySubject(1);
     }
 
     addType(objects: any[], type: string) {
@@ -84,8 +82,7 @@ export class TriblerService {
     search(term: string): Observable<Download[]> {
         console.log(this.searchResults.length);
         console.log('CLEAR!');
-        this._searchQueryObserver.next(term);
-        //this.searchQuery = term;
+        this.searchQuery$.next(term);
         // Clear the old search results
         this.searchResults.length = 0;
         while(this.searchResults.length > 0) {

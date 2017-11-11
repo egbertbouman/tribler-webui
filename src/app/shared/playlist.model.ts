@@ -1,5 +1,5 @@
 // For compile-time type checking and code completion
-import {Torrent} from './torrent';
+import { Torrent } from './torrent.model';
 
 export interface Playlist {
     id: number;

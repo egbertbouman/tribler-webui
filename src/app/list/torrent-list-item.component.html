@@ -1,8 +1,8 @@
-<div class="row listitem">
-    <div class="col-xs-1">
+<div class="row listitem flex-nowrap">
+    <div class="col-xs">
         <div class="color-box" randomBackgroundColor>{{ torrent.name | abbreviate }}</div>
     </div>
-    <div class="col-xs-5">
+    <div class="col">
         <div class="row hide-overflow">
             <div class="badge badge-outline">{{ torrent.category | lowercase }}</div> {{ torrent.name }}
         </div>
@@ -10,14 +10,14 @@
             Size {{ (torrent.size || 0) | fileSize }}
         </div>
     </div>
-    <div class="col-xs-6">
+    <div class="col-xs">
         <div class="badge badge-outline pull-right clickable" (click)="play()"><div class="fa fa-play"></div></div>
         <div class="badge badge-outline pull-right clickable" (click)="staticModal.show()"><div class="fa fa-arrow-down"></div></div>
     </div>
 </div>
 
  
-<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
@@ -44,4 +44,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

@@ -1,31 +1,12 @@
-@import '/src/app/downloads/datatable.css';
-
 .progress-bar {
-    color: #282828;
+    color: #fff;
 }
 .progress {
-    margin-bottom: 0 !important;
-}
-.datatable-body-cell {
-    padding: 5px 5px;
+    margin-top: 5px;
 }
 .header {
     border-bottom: 1px solid black;
     margin: 0px;
     padding: 3px 10px !important;
     color: #ccc;
-}
-
-.borderless td, .borderless th {
-    border: none;
-}
-.fa {
-    margin: 2px;
-}
-.table td, .table th {
-    min-width: 90px;
-}
-
-.tablewrapper {
-    height: 100%;
 }

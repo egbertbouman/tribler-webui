@@ -1,9 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
 
+h3 {
+    margin: 5px 0;
+}
+
 /* Table styles */
 .ngx-datatable .datatable-header, .ngx-datatable .datatable-body-row {
     margin: 0 10px;
 }
 .ngx-datatable, .ngx-datatable .datatable-body {
     position: absolute; top:0;left:0;right:0;bottom:0;
+}
+.ngx-datatable {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+.ngx-datatable .datatable-body {
+    flex: 1;
+}
+.ngx-datatable .datatable-body-cell {
+    padding-right: 10px;
+}
+.ngx-datatable .datatable-header {
+    flex: 0 0 auto;
+}
+.ngx-datatable .datatable-body, .ngx-datatable .visible {
+    display: flex !important;
+    flex: 1 !important;
+    flex-direction: column !important;
 }

@@ -9,7 +9,8 @@ import { TriblerService } from '../shared/tribler.service';
 @Component({
     selector: 'downloads',
     templateUrl: './downloads.component.html',
-    styleUrls: ['./downloads.component.css']
+    styleUrls: ['./downloads.component.css'],
+    host: {'class': 'd-flex flex-column col p-0'}
 })
 export class DownloadsComponent implements OnInit {
     downloads = [];

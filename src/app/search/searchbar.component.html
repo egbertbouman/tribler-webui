@@ -3,8 +3,8 @@
         <i class="fa fa-bars fa-lg"></i>
     </a>
     <a class="navbar-brand" href="#">Tribler</a>
-    <form class="form-inline">
-        <div class="input-group">
+    <form class="form-inline flex-grow">
+        <div class="input-group flex-grow">
             <input [(ngModel)]="query" [ngModelOptions]="{standalone: true}"
                    [ngbTypeahead]="completions" type="search" class="form-control"
                    (keyup.enter)="search()" placeholder="Search for your favorite content">

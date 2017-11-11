@@ -109,8 +109,10 @@ export class TriblerService {
         switch (json.type) {
             case'search_result_channel':
               var channel = json.event.result;
-              channel.type = 'channel';
-              this.searchResults.push(channel);
+              if (channel.torrents > 0) {
+                channel.type = 'channel';
+                this.searchResults.push(channel);
+              }
               break;
             case'search_result_torrent':
               var torrent = json.event.result;

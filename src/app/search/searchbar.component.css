@@ -9,4 +9,6 @@
 }
 .btn-gray {
     color: #aaa;
+    border: 1px solid;
+    margin-right: 10px;
 }

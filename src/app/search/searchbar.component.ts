@@ -40,7 +40,6 @@ export class SearchbarComponent implements OnInit {
         this._triblerService.search(this.query).subscribe(
             data => console.log(data),
             error => console.log(error)
-
         );
     }
 }

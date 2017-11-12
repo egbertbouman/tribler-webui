@@ -8,6 +8,10 @@
       </div>
   </div>
   <div class="col-xs">
-      <div class="pull-right"><div class="fa fa-heart" [class.subscribed]="channel.subscribed"></div><small> {{ channel.votes }} votes</small></div>
+      <div class="pull-right">
+          <div class="fa fa-heart" (click)="toggle_subscription($event)"
+              [class.subscribed]="channel.subscribed" [class.unsubscribed]="!channel.subscribed"></div>
+           <small> {{ channel.votes }} votes</small>
+        </div>
   </div>
 </div>

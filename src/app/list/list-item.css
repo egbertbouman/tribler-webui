@@ -26,6 +26,12 @@
 .subscribed {
     color: deeppink;
 }
+.unsubscribed {
+    color: #ccc;
+}
+.subscribed:hover, .unsubscribed:hover {
+    color: rgb(255, 199, 230);
+}
 .color-box {
     float: left;
     width: 50px;

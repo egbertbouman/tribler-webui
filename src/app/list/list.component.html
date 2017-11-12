@@ -1,8 +1,9 @@
-<div class="listheader">
-    <h3>
+<div class="listheader row align-items-center">
+    <h3 class="flex-grow">
         <span *ngIf="showBackButton" class="fa fa-chevron-left back" (click)="back()"> </span>
-        {{ title }} <small class="pull-right">showing: {{ ((itemsMaxShown > items.length) ? items.length : itemsMaxShown) }}/{{ items.length }}</small>
+        {{ title }}
     </h3>
+    <small class="align-middle">showing: {{ ((itemsMaxShown > items.length) ? items.length : itemsMaxShown) }}/{{ items.length }}</small>
 </div>
 <div infinite-scroll
     [infiniteScrollDistance]="scrollDistance"

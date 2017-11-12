@@ -10,7 +10,7 @@
             Size {{ (torrent.size || 0) | fileSize }}
         </div>
     </div>
-    <div class="col-xs">
+    <div class="col-xs d-flex align-items-center">
         <div class="badge badge-outline pull-right clickable" (click)="play()"><div class="fa fa-play"></div></div>
         <div class="badge badge-outline pull-right clickable" (click)="staticModal.show()"><div class="fa fa-arrow-down"></div></div>
     </div>

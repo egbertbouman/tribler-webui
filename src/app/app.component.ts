@@ -10,7 +10,9 @@ import { TriblerService } from './shared/tribler.service';
   providers: [TriblerService]
 })
 export class AppComponent {
-    constructor(private _router: Router) { }
+    constructor(private _router: Router,
+                public triblerService: TriblerService) {
+    }
 
     ngOnInit() {
         this._router.events.subscribe((evt) => {

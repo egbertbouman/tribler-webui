@@ -42,3 +42,9 @@
 .text-inverse {
     color: white;
 }
+
+a.disabled {
+    color: #888;
+    pointer-events: none;
+    cursor: default;
+ }

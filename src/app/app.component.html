@@ -9,7 +9,7 @@
         <section>
             <ul class="nav flex-column">
                 <li class="nav-item"><a class="nav-link" [routerLink]="['home']" routerLinkActive="active"><i class="fa fa-home"></i> Home</a></li>
-                <li class="nav-item"><a class="nav-link" [routerLink]="['search']" routerLinkActive="active"><i class="fa fa-search"></i> Search results</a></li>
+                <li class="nav-item"><a class="nav-link" [routerLink]="['search']" routerLinkActive="active" [class.disabled]="triblerService.searchResults.length === 0"><i class="fa fa-search"></i> Search results</a></li>
                 <li class="nav-item"><a class="nav-link" [routerLink]="['channels']" routerLinkActive="active"><i class="fa fa-globe"></i> Discovered</a></li>
                 <li class="nav-item"><a class="nav-link" [routerLink]="['mychannel']" routerLinkActive="active"><i class="fa fa-share-alt"></i> My Channel</a></li>
                 <li class="nav-item"><a class="nav-link" [routerLink]="['subscriptions']" routerLinkActive="active"><i class="fa fa-heart"></i> Subscriptions</a></li>

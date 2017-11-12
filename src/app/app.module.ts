@@ -3,12 +3,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
+import { HashLocationStrategy, Location, LocationStrategy } from '@angular/common';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-// import { ProgressbarModule } from 'ng2-bootstrap/progressbar';
-// import { ModalModule } from 'ng2-bootstrap/modal';
-// import { TypeaheadModule } from 'ng2-bootstrap/typeahead';
 
 import { FileSizePipe } from './file-size.pipe';
 import { AbbreviatePipe } from './abbreviate.pipe';
@@ -40,37 +38,36 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ChannelComponent,
-    AllChannelComponent,
-    HomeComponent,
-    DownloadsComponent,
-    MyChannelComponent,
-    SubscriptionsComponent,
-    VideoplayerComponent,
-    TorrentListItemComponent,
-    ChannelListItemComponent,
-    FileSizePipe,
-    AbbreviatePipe,
-    ListComponent,
-    RandomBackgroundColorDirective,
-    SearchbarComponent,
-    SearchresultsComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    RouterModule.forRoot(routes),
-    InfiniteScrollModule,
-    NgxDatatableModule,
-    NgbModule.forRoot()
-    // ProgressbarModule.forRoot(),
-    // ModalModule.forRoot(),
-    // TypeaheadModule.forRoot()
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        ChannelComponent,
+        AllChannelComponent,
+        HomeComponent,
+        DownloadsComponent,
+        MyChannelComponent,
+        SubscriptionsComponent,
+        VideoplayerComponent,
+        TorrentListItemComponent,
+        ChannelListItemComponent,
+        FileSizePipe,
+        AbbreviatePipe,
+        ListComponent,
+        RandomBackgroundColorDirective,
+        SearchbarComponent,
+        SearchresultsComponent
+    ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpModule,
+        RouterModule.forRoot(routes),
+        InfiniteScrollModule,
+        NgxDatatableModule,
+        NgbModule.forRoot()
+    ],
+    providers: [Location,
+        { provide: LocationStrategy, useClass: HashLocationStrategy }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

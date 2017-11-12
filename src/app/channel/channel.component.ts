@@ -5,10 +5,10 @@ import { TriblerService } from '../shared/tribler.service';
 
 @Component({
     selector: 'channel',
-    template: `<list [showBackButton]="true" [title]="overview?.name" [items]="items"></list>`
+    template: `<list [showBackButton]="true" [title]="channel?.name" [items]="items"></list>`
 })
 export class ChannelComponent implements OnInit {
-    overview;
+    channel;
     items = [];
 
     constructor(
@@ -20,8 +20,8 @@ export class ChannelComponent implements OnInit {
         this._activatedRoute.params
             .map(params => params['id'])
             .subscribe(id => {
-                this._triblerService.getChannelOverview(id)
-                    .subscribe(overview => this.overview = overview);
+                this._triblerService.getChannel(id)
+                    .subscribe(channel => this.channel = channel);
                 this._triblerService.getTorrentsForChannel(id)
                     .subscribe(torrents => this.items = this.items.concat(torrents));
                 this._triblerService.getPlaylistsForChannel(id)

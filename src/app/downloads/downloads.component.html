@@ -5,7 +5,11 @@
     [headerHeight]="50"
     [footerHeight]="0"
     [scrollbarV]="false"
-    [scrollbarH]="true">
+    [scrollbarH]="true"
+    [selected]="selected"
+    [selectionType]="'single'"
+    (activate)="onActivate($event)"
+    (select)='onSelect($event)'>
 
     <ngx-datatable-column prop="name" name="Name" [minWidth]="150" [canAutoResize]="false"></ngx-datatable-column>
     <ngx-datatable-column prop="size" name="Size" [canAutoResize]="false">

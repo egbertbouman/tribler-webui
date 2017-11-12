@@ -36,7 +36,7 @@ export class TriblerService {
             .do(items => this.addType(items, 'torrent'));
     }
 
-    getChannelOverview(id: string): Observable<Object> {
+    getChannel(id: string): Observable<Object> {
         return this._http.get(this._api_base + `/channels/discovered/${id}`)
             .map(res => res.json().overview);
     }

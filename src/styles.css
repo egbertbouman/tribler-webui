@@ -10,7 +10,10 @@ h3 {
 
 /* Table styles */
 .ngx-datatable .datatable-header, .ngx-datatable .datatable-body-row {
-    margin: 0 10px;
+    padding: 0 10px;
+}
+.ngx-datatable .datatable-body-row.active {
+    background-color: #9c9c9c;
 }
 .ngx-datatable, .ngx-datatable .datatable-body {
     position: absolute; top:0;left:0;right:0;bottom:0;
@@ -24,7 +27,7 @@ h3 {
     flex: 1;
 }
 .ngx-datatable .datatable-body-cell {
-    padding-right: 10px;
+    margin-right: 10px;
 }
 .ngx-datatable .datatable-header {
     flex: 0 0 auto;

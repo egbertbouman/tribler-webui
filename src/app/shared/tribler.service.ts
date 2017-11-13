@@ -75,7 +75,7 @@ export class TriblerService {
     }
 
     getDownloads(): Observable<Download[]> {
-        return this._http.get(this._api_base + '/downloads?get_pieces=1')
+        return this._http.get(this._api_base + '/downloads?get_pieces=1&get_peers=1')
             .map(res => res.json().downloads);
     }
     startDownload(destination: string, uri: string, hops: number): Observable<string> {

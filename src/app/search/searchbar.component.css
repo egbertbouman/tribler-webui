@@ -4,7 +4,7 @@
     border-bottom: 1px solid black;
 }
 .navbar-brand, .navbar-brand:hover {
-    color: coral !important;
+    color: #e67300;
     font-size: x-large !important;
 }
 .btn-gray {

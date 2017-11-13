@@ -1,9 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
+body {
+    color: #ddd;
+}
 h3 {
     margin: 5px 0;
 }
-
 .flex-grow {
     flex: 1 0 auto;
 }
@@ -11,9 +13,20 @@ h3 {
 /* Table styles */
 .ngx-datatable .datatable-header, .ngx-datatable .datatable-body-row {
     padding: 0 10px;
+    cursor: pointer;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+.ngx-datatable .datatable-body-row {
+    cursor: pointer;
 }
 .ngx-datatable .datatable-body-row.active {
-    background-color: #9c9c9c;
+    background-color: #888;
 }
 .ngx-datatable, .ngx-datatable .datatable-body {
     position: absolute; top:0;left:0;right:0;bottom:0;

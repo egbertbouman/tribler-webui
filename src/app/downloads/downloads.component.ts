@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-//import { ProgressbarModule, ProgressbarConfig } from 'ng2-bootstrap/ng2-bootstrap';
 import { Observable } from 'rxjs/Rx';
 
 import { FileSizePipe } from '../file-size.pipe';
@@ -34,6 +33,11 @@ export class DownloadsComponent implements OnInit {
                     this.selected[0] = undefined;
                     this.downloads.forEach(function (value, index) {
                         if (value && selected.infohash === value.infohash) {
+                            value.files.sort(function (a: any, b: any) {
+                                var x = a.name.toLowerCase();
+                                var y = b.name.toLowerCase();
+                                return x < y ? -1 : x > y ? 1 : 0;
+                            });
                             self.selected[0] = value;
                         }
                     });

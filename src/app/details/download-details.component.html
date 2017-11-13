@@ -1,0 +1,114 @@
+<ngb-tabset>
+    <ngb-tab title="Details">
+        <ng-template ngbTabContent>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td class="text-white">Progress</td>
+                        <td>{{ download.progress * 100 | number:'1.0-1' }}%</td>
+                    </tr>
+                    <tr>
+                        <td class="text-white">Name</td>
+                        <td>{{ download.name }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-white">Status</td>
+                        <td>{{ download.status }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-white">Filesize</td>
+                        <td>{{ download.size | fileSize:1  }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-white">Health</td>
+                        <td>{{ download.num_seeds }} seeders, {{ download.num_peers }} leechers</td>
+                    </tr>
+                    <tr>
+                        <td class="text-white">Infohash</td>
+                        <td>{{ download.infohash }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-white">Destination</td>
+                        <td>{{ download.destination }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-white">Ratio</td>
+                        <td>{{ download.ratio | number:'1.1-1' }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-white">Availability</td>
+                        <td>{{ download.availability | number:'1.1-1' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Files">
+        <ng-template ngbTabContent>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Path</th>
+                        <th>Size</th>
+                        <th>Completion (%)</th>
+                        <th>Included</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let file of download.files">
+                        <td>{{ file.name }}</td>
+                        <td>{{ file.size | fileSize:1 }}</td>
+                        <td>{{ file.progress * 100 | number:'1.0-1' }}%</td>
+                        <td>{{ (file.included) ? 'yes' : no }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Trackers">
+        <ng-template ngbTabContent>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Status</th>
+                        <th>Peers</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let tracker of download.trackers">
+                        <td>{{ tracker.url }}</td>
+                        <td>{{ tracker.status }}</td>
+                        <td>{{ tracker.peers }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Peers">
+        <ng-template ngbTabContent>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Peer</th>
+                        <th>Completed</th>
+                        <th>&darr;  Speed</th>
+                        <th>&uarr;  Speed</th>
+                        <th>Flags</th>
+                        <th>Client</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let peer of download.peers">
+                        <td>{{ peer.ip }}:{{ peer.port }}</td>
+                        <td>{{ peer.completed * 100 | number:'1.0-1' }}%</td>
+                        <td>{{ peer.downrate | fileSize:1 }}</td>
+                        <td>{{ peer.uprate | fileSize:1 }}</td>
+                        <td>{{ get_state(peer) }}</td>
+                        <td>{{ peer.extended_version }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </ng-template>
+    </ngb-tab>
+</ngb-tabset>

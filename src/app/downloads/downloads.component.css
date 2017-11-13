@@ -1,12 +1,18 @@
 .progress-bar {
-    color: #fff;
+    color: #000;
+    background-color: #e67300;
 }
 .progress {
-    margin-top: 5px;
+    margin-top: 7px;
+    background-color:#fff;
 }
 .header {
     border-bottom: 1px solid black;
     margin: 0px;
     padding: 3px 10px !important;
     color: #ccc;
+}
+download-details {
+    width:100%;
+    flex-grow:inherit !important;
 }

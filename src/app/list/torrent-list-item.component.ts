@@ -25,8 +25,9 @@ export class TorrentListItemComponent {
     }
 
     open_download_modal(torrent) {
-        const modalRef = this._modalService.open(TorrentDownloadComponent);
-        modalRef.componentInstance.torrent = torrent;
+        const modalRef = this._modalService.open(TorrentDownloadComponent, {size: 'lg'});
+        // The service needs to be set first
         modalRef.componentInstance.triblerService = this._triblerService;
+        modalRef.componentInstance.torrent = torrent;
     }
 }

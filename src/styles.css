@@ -85,3 +85,12 @@ button {
     background-color: #222;
     color: #ddd;
 }
+.close {
+    padding: 0px !important;
+    margin: 0px !important;
+    color: #ddd;
+    text-shadow: none;
+}
+.close:hover {
+    color: #e67300;
+}

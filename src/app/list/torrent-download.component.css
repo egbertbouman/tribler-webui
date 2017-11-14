@@ -1,0 +1,11 @@
+.table {
+    margin: 10px;
+}
+.table th, td {
+    padding: 0px;
+    border: 0px;
+}
+.table th {
+    font-weight: normal;
+    color: #fff;
+}

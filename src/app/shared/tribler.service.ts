@@ -86,8 +86,12 @@ export class TriblerService {
         return this._http.get(this._api_base + '/downloads?get_pieces=1&get_peers=1')
             .map(res => res.json().downloads);
     }
-    startDownload(destination: string, uri: string, hops: number): Observable<string> {
-        return this._http.put(this._api_base + '/downloads', `anon_hops=${hops}&safe_seeding=1&destination=${destination}&uri=${uri}`)
+    startDownload(destination: string, uri: string, hops: number, selected_files: string[]): Observable<string> {
+        var body = `anon_hops=${hops}&safe_seeding=1&destination=${destination}&uri=${uri}`
+        for (let file of selected_files) {
+            body += '&selected_files[]=' + file;
+        }
+        return this._http.put(this._api_base + '/downloads', body)
             .map(res => res.json());
     }
     stopDownload(infohash: string): Observable<string> {
@@ -103,14 +107,16 @@ export class TriblerService {
         return this._http.delete(this._api_base + `/downloads/${infohash}`, options)
             .map(res => res.json().removed);
     }
+    getTorrentInfo(magnet): Observable<string> {
+        return this._http.get(this._api_base + `/torrentinfo?uri=${magnet}`)
+            .map(res => res.json().metainfo);
+    }
 
     searchCompletions(term: string): Observable<Download[]> {
         return this._http.get(this._api_base + `/search/completions?q=${encodeURI(term)}`)
             .map(res => res.json().completions);
     }
     search(term: string): Observable<Download[]> {
-        console.log(this.searchResults.length);
-        console.log('CLEAR!');
         this.searchQuery$.next(term);
         // Clear the old search results
         this.searchResults.length = 0;

@@ -16,7 +16,7 @@ import { ChannelComponent } from './channel/channel.component';
 import { AllChannelComponent } from './allchannel/allchannel.component';
 import { HomeComponent } from './home/home.component';
 import { DownloadsComponent } from './downloads/downloads.component';
-import { DownloadDetailsComponent } from './details/download-details.component';
+import { DownloadDetailsComponent } from './downloads/download-details.component';
 import { MyChannelComponent } from './mychannel/mychannel.component';
 import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
 import { VideoplayerComponent } from './videoplayer/videoplayer.component';

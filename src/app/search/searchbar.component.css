@@ -3,6 +3,10 @@
     margin-bottom: 0px;
     border-bottom: 1px solid black;
 }
+.navbar input:focus, .btn-gray {
+    border: 1px solid lightgray;
+    box-shadow: none;
+}
 .navbar-brand, .navbar-brand:hover {
     color: #e67300;
     font-size: x-large !important;

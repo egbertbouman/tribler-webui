@@ -10,6 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { FileSizePipe } from './file-size.pipe';
 import { AbbreviatePipe } from './abbreviate.pipe';
+import { DownloadStatusPipe } from './download-status.pipe';
 import { AppComponent } from './app.component';
 import { ChannelComponent } from './channel/channel.component';
 import { AllChannelComponent } from './allchannel/allchannel.component';
@@ -53,6 +54,7 @@ const routes: Routes = [
         ChannelListItemComponent,
         FileSizePipe,
         AbbreviatePipe,
+        DownloadStatusPipe,
         ListComponent,
         RandomBackgroundColorDirective,
         SearchbarComponent,

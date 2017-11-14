@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { FileSizePipe } from '../file-size.pipe';
+import { DownloadStatusPipe } from '../download-status.pipe';
 import { TriblerService } from '../shared/tribler.service';
 
 @Component({

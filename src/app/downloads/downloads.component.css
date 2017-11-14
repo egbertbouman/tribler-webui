@@ -1,10 +1,21 @@
 .progress-bar {
     color: #000;
     background-color: #e67300;
+    width: 30px;
 }
 .progress {
     margin-top: 7px;
     background-color:#fff;
+    position: relative;
+}
+.progress-bar-title {
+    position: absolute;
+    text-align: center;
+    line-height: 30px;
+    overflow: hidden;
+    color: #000;
+    right: 0;
+    left: 0;
 }
 .header {
     border-bottom: 1px solid black;
@@ -15,4 +26,10 @@
 download-details {
     width:100%;
     flex-grow:inherit !important;
+}
+.badge-outline {
+    font-weight: normal;
+    font-size: 20px;
+    border: 1px solid #999;
+    background-color: transparent;
 }

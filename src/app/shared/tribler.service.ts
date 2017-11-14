@@ -1,4 +1,4 @@
-import { Http } from '@angular/http';
+import { Http, RequestOptions } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
@@ -81,6 +81,19 @@ export class TriblerService {
     startDownload(destination: string, uri: string, hops: number): Observable<string> {
         return this._http.put(this._api_base + '/downloads', `anon_hops=${hops}&safe_seeding=1&destination=${destination}&uri=${uri}`)
             .map(res => res.json());
+    }
+    stopDownload(infohash: string): Observable<string> {
+        return this._http.patch(this._api_base + `/downloads/${infohash}`, 'state=stop')
+            .map(res => res.json().modified);
+    }
+    resumeDownload(infohash: string): Observable<string> {
+        return this._http.patch(this._api_base + `/downloads/${infohash}`, 'state=resume')
+            .map(res => res.json().modified);
+    }
+    removeDownload(infohash: string, remove_data: boolean): Observable<string> {
+        var options = new RequestOptions({body: `remove_data=${(remove_data) ? 1 : 0}`});
+        return this._http.delete(this._api_base + `/downloads/${infohash}`, options)
+            .map(res => res.json().removed);
     }
 
     searchCompletions(term: string): Observable<Download[]> {

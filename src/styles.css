@@ -9,6 +9,9 @@ h3 {
 .flex-grow {
     flex: 1 0 auto;
 }
+button {
+    cursor: pointer;
+}
 
 /* Table styles */
 .ngx-datatable .datatable-header, .ngx-datatable .datatable-body-row {

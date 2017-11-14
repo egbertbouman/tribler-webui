@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
 import { FileSizePipe } from '../file-size.pipe';
+import { DownloadStatusPipe } from '../download-status.pipe';
 import { TriblerService } from '../shared/tribler.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class DownloadsComponent implements OnInit {
     downloads = [];
     selected = [];
 
-    constructor(private _triblerService: TriblerService) {
+    constructor(public _triblerService: TriblerService) {
     }
 
     ngOnInit() {
@@ -43,6 +44,27 @@ export class DownloadsComponent implements OnInit {
                     });
                 }
             });
+    }
+
+    resumeDownload() {
+        if (this.selected[0] === undefined) {
+            return;
+        }
+        this._triblerService.resumeDownload(this.selected[0].infohash).subscribe();
+    }
+
+    stopDownload() {
+        if (this.selected[0] === undefined) {
+            return;
+        }
+        this._triblerService.stopDownload(this.selected[0].infohash).subscribe();
+    }
+
+    removeDownload() {
+        if (this.selected[0] === undefined) {
+            return;
+        }
+        this._triblerService.removeDownload(this.selected[0].infohash, false).subscribe();
     }
 
     onSelect({ selected }) {

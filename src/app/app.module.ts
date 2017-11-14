@@ -26,6 +26,7 @@ import { ListComponent } from './list/list.component';
 import { RandomBackgroundColorDirective } from './random-background-color.directive';
 import { SearchbarComponent } from './search/searchbar.component';
 import { SearchresultsComponent } from './search/searchresults.component';
+import { TorrentDownloadComponent } from './list/torrent-download.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -58,7 +59,8 @@ const routes: Routes = [
         ListComponent,
         RandomBackgroundColorDirective,
         SearchbarComponent,
-        SearchresultsComponent
+        SearchresultsComponent,
+        TorrentDownloadComponent
     ],
     imports: [
         BrowserModule,
@@ -71,6 +73,9 @@ const routes: Routes = [
     ],
     providers: [Location,
         { provide: LocationStrategy, useClass: HashLocationStrategy }
+    ],
+    entryComponents: [
+        TorrentDownloadComponent
     ],
     bootstrap: [AppComponent]
 })

@@ -69,3 +69,9 @@ button {
     flex: 1 !important;
     flex-direction: column !important;
 }
+
+/* Modal styles */
+.modal-content {
+    background-color: #222;
+    color: #ddd;
+}

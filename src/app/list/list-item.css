@@ -44,9 +44,6 @@
     font-size: large;
     font-weight: bold;
 }
-.modal-content {
-    background-color: #282828;
-}
 .col {
     /* Ensures that text is truncated properly in the flexbox  */
     min-width: 0px !important;

@@ -27,7 +27,12 @@ button {
 .btn-outline-tribler.active {
     background-color: #222;
 }
-
+.header {
+    border-bottom: 1px solid black;
+    margin: 0px;
+    padding: 3px 10px !important;
+    color: #ccc;
+}
 
 /* Table styles */
 .ngx-datatable .datatable-header, .ngx-datatable .datatable-body-row {

@@ -17,12 +17,6 @@
     right: 0;
     left: 0;
 }
-.header {
-    border-bottom: 1px solid black;
-    margin: 0px;
-    padding: 3px 10px !important;
-    color: #ccc;
-}
 download-details {
     width:100%;
     flex-grow:inherit !important;

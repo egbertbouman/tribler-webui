@@ -1,4 +1,4 @@
-<div class="listheader row align-items-center">
+<div *ngIf="showHeader" class="header row align-items-center">
     <h3 class="flex-grow">
         <span *ngIf="showBackButton" class="fa fa-chevron-left back" (click)="back()"> </span>
         {{ title }}

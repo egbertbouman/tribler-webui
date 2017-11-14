@@ -10,6 +10,7 @@ export class ListComponent implements OnInit {
     @Input() title = "";
     @Input() items = [];
     @Input() showBackButton = false;
+    @Input() showHeader = true;
 
     itemsMaxShown = 20;
     throttle = 300;

@@ -9,7 +9,7 @@
     <form>
         <div class="form-group">
             <label class="control-label">Destination</label>
-            <input type="text" class="form-control" placeholder="Leave empty for default" popover-is-open="name_popover" popover-trigger="none"
+            <input type="text" class="form-control" placeholder="Leave empty for default"
                 [(ngModel)]="location" [ngModelOptions]="{standalone: true}">
         </div>
         <div class="form-group">
@@ -20,6 +20,6 @@
     </form>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-outline-tribler" (click)="activeModal.close('Close click')">Cancel</button>
     <button type="button" class="btn btn-outline-tribler" (click)="download()">Download</button>
+    <button type="button" class="btn btn-outline-tribler" (click)="activeModal.close('Close click')">Cancel</button>
 </div>

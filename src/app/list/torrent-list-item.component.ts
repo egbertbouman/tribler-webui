@@ -24,7 +24,7 @@ export class TorrentListItemComponent {
         console.log("play " + this.torrent.infohash);
     }
 
-    download(torrent) {
+    open_download_modal(torrent) {
         const modalRef = this._modalService.open(TorrentDownloadComponent);
         modalRef.componentInstance.torrent = torrent;
         modalRef.componentInstance.triblerService = this._triblerService;

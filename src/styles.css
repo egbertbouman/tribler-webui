@@ -27,6 +27,11 @@ button {
 .btn-outline-tribler.active {
     background-color: #222;
 }
+.btn-outline-tribler.disabled {
+    color: #ccc;
+    border: 1px solid #ccc;
+    cursor: not-allowed;
+}
 .header {
     border-bottom: 1px solid black;
     margin: 0px;

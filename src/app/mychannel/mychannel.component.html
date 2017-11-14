@@ -1,0 +1,66 @@
+<div class="header row align-items-center">
+    <h3 class="flex-grow">
+        My channel
+    </h3>
+    <button class="btn btn-sm btn-outline-tribler"
+        [class.disabled]="mychannel"
+        [disabled]="mychannel"
+        (click)="create_channel_modal(content)">Create</button>
+</div>
+<div *ngIf="!mychannel" class="header border-0">You don't currently have your own channel.</div>
+<div *ngIf="mychannel" class="header border-0">
+    <ngb-tabset>
+        <ngb-tab title="Overview">
+            <ng-template ngbTabContent>
+                <div class="container p-0 mt-3">
+                    <p>Welcome to the management interface of your channel!</p>
+                    <p>Here, you can change settings of you channel, manage your shared torrents, manage your playlists and add rss feeds which
+                        are periodically polled.</p>
+
+                    <p>
+                        <span class="text-white">Name</span><br>
+                        {{ mychannel.name }}
+                    </p>
+
+                    <p>
+                        <span class="text-white">Description</span><br>
+                        {{ mychannel.description }}
+                    </p>
+
+                    <p>
+                        <span class="text-white">Identifier</span><br>
+                        {{ mychannel.identifier }}
+                    </p>
+                </div>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Settings">
+            <ng-template ngbTabContent>
+                <div class="container p-0 mt-3">
+                    <form>
+                        <div class="form-group">
+                            <label class="control-label">Name</label>
+                            <input type="text" class="form-control"
+                                [(ngModel)]="mychannel.name" [ngModelOptions]="{standalone: true}">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Description</label>
+                            <input type="text" class="form-control"
+                                [(ngModel)]="mychannel.description" [ngModelOptions]="{standalone: true}">
+                        </div>
+                        <button class="btn btn-sm btn-outline-tribler"
+                            (click)="update()">Update</button>
+                    </form>
+                </div>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Torrents">
+            <ng-template ngbTabContent>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab title="RSS Feeds">
+            <ng-template ngbTabContent>
+            </ng-template>
+        </ngb-tab>
+    </ngb-tabset>
+</div>

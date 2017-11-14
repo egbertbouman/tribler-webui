@@ -63,6 +63,14 @@ export class TriblerService {
         return this._http.delete(this._api_base + `/channels/subscribed/${id}`)
             .map(res => res.json());
     }
+    getMyChannel() {
+        return this._http.get(this._api_base + '/mychannel')
+            .map(res => res.json().mychannel);
+    }
+    createMyChannel(name: string, description: string) {
+        return this._http.put(this._api_base + '/channels/discovered', `name=${name}&description=${description}`)
+            .map(res => res.json());
+    }
     getTorrentsForChannel(id: string): Observable<Torrent[]> {
         return this._http.get(this._api_base + `/channels/discovered/${id}/torrents`)
             .map(res => res.json().torrents)

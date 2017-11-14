@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
 import { FileSizePipe } from '../file-size.pipe';
@@ -16,7 +15,7 @@ export class DownloadsComponent implements OnInit {
     downloads = [];
     selected = [];
 
-    constructor(public _triblerService: TriblerService) {
+    constructor(private _triblerService: TriblerService) {
     }
 
     ngOnInit() {
@@ -60,11 +59,11 @@ export class DownloadsComponent implements OnInit {
         this._triblerService.stopDownload(this.selected[0].infohash).subscribe();
     }
 
-    removeDownload() {
+    removeDownload(remove_data: boolean) {
         if (this.selected[0] === undefined) {
             return;
         }
-        this._triblerService.removeDownload(this.selected[0].infohash, false).subscribe();
+        this._triblerService.removeDownload(this.selected[0].infohash, remove_data).subscribe();
     }
 
     onSelect({ selected }) {

@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -13,7 +15,8 @@ export class TorrentDownloadComponent implements OnInit {
     location = '';
     triblerService;
 
-    constructor(public activeModal: NgbActiveModal) {
+    constructor(public activeModal: NgbActiveModal,
+                private _router: Router) {
     }
 
     ngOnInit() {
@@ -21,6 +24,7 @@ export class TorrentDownloadComponent implements OnInit {
 
     download() {
         this.activeModal.close('Download')
+        this._router.navigateByUrl("/downloads");
         this.triblerService.startDownload('', `magnet:?xt=urn:btih:${this.torrent.infohash}&dn=${this.torrent.name}`, this.hops)
             .subscribe();
     }

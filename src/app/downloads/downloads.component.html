@@ -1,9 +1,9 @@
 <div class="header row align-items-center">
     <h3 class="flex-grow">Downloads</h3>
     <div class="align-middle">
-        <div class="badge badge-outline" (click)="resumeDownload()"><div class="fa fa-play"></div></div>
-        <div class="badge badge-outline" (click)="stopDownload()"><div class="fa fa-stop"></div></div>
-        <div class="badge badge-outline" (click)="removeDownload()"><div class="fa fa-remove"></div></div>
+        <button type="button" class="btn btn-outline-tribler" (click)="resumeDownload()"><div class="fa fa-play"></div></button>
+        <button type="button" class="btn btn-outline-tribler" (click)="stopDownload()"><div class="fa fa-stop"></div></button>
+        <button type="button" class="btn btn-outline-tribler" (click)="removeDownload()"><div class="fa fa-remove"></div></button>
     </div>
 </div>
 
@@ -54,12 +54,5 @@
     <ngx-datatable-column prop="num_seeds" name="Seeds" [canAutoResize]="false"></ngx-datatable-column>
     <ngx-datatable-column prop="num_peers" name="Peers" [canAutoResize]="false"></ngx-datatable-column>
     <ngx-datatable-column prop="hops" name="Hops" [canAutoResize]="false"></ngx-datatable-column>
-    <ngx-datatable-column name="Actions">
-        <ng-template let-value="value" ngx-datatable-cell-template>
-            <i class="fa fa-play p-1"></i>
-            <i class="fa fa-stop p-1"></i>
-            <i class="fa fa-remove p-1"></i>
-        </ng-template>
-    </ngx-datatable-column>
 </ngx-datatable>
 <download-details *ngIf="selected[0]" [download]="selected[0]"></download-details>

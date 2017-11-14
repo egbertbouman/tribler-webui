@@ -12,6 +12,22 @@ h3 {
 button {
     cursor: pointer;
 }
+.btn-outline-tribler,
+.btn-outline-tribler:focus {
+    box-shadow: none;
+    color: #ccc;
+    background-color: transparent;
+    border: 1px solid #ccc;
+}
+.btn-outline-tribler:hover {
+    color: #e67300;
+    border-color: #e67300;
+}
+.btn-outline-tribler:active,
+.btn-outline-tribler.active {
+    background-color: #222;
+}
+
 
 /* Table styles */
 .ngx-datatable .datatable-header, .ngx-datatable .datatable-body-row {

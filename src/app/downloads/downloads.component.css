@@ -27,9 +27,3 @@ download-details {
     width:100%;
     flex-grow:inherit !important;
 }
-.badge-outline {
-    font-weight: normal;
-    font-size: 20px;
-    border: 1px solid #999;
-    background-color: transparent;
-}

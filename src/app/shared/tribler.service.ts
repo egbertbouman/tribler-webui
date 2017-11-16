@@ -132,7 +132,7 @@ export class TriblerService {
             .map(res => res.json().statistics);
     }
     getTrustchainBlocks(user_id: string): Observable<Object[]> {
-        return this._http.get(this._api_base + `/multichain/blocks/${user_id}`)
+        return this._http.get(this._api_base + `/multichain/blocks/${encodeURIComponent(user_id)}`)
             .map(res => res.json().blocks);
     }
 
@@ -147,7 +147,7 @@ export class TriblerService {
             .map(res => res.json());
     }
     searchCompletions(term: string): Observable<Download[]> {
-        return this._http.get(this._api_base + `/search/completions?q=${encodeURI(term)}`)
+        return this._http.get(this._api_base + `/search/completions?q=${encodeURIComponent(term)}`)
             .map(res => res.json().completions);
     }
     getEvents(): Observable<any[]> {
@@ -165,23 +165,28 @@ export class TriblerService {
         console.log(json);
         switch (json.type) {
             case'search_result_channel':
-              var channel = json.event.result;
-              if (channel.torrents > 0) {
-                channel.type = 'channel';
-                this.searchResults.push(channel);
-              }
-              break;
+                var channel = json.event.result;
+                if (channel.torrents > 0) {
+                    channel.type = 'channel';
+                    this.searchResults.push(channel);
+                }
+                break;
             case'search_result_torrent':
-              var torrent = json.event.result;
-              torrent.type = 'torrent';
-              this.searchResults.push(torrent);
-              break;
+                var torrent = json.event.result;
+                torrent.type = 'torrent';
+                this.searchResults.push(torrent);
+                this.searchResults.sort(function(a, b) {
+                    if (a.relevance_score < b.relevance_score) return 1;
+                    if (a.relevance_score > b.relevance_score) return -1;
+                    return 0;
+                });
+                break;
             case'channel_discovered':
-              console.log('channel_discovered');
-              break;
+                console.log('channel_discovered');
+                break;
             case'torrent_discovered':
-              console.log('torrent_discovered');
-              break;
+                console.log('torrent_discovered');
+                break;
         }
     }
 }

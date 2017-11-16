@@ -24,8 +24,10 @@
     "@ng-bootstrap/ng-bootstrap": "^1.0.0-beta.5",
     "@swimlane/ngx-datatable": "^11.0.3",
     "bootstrap": "^4.0.0-beta.2",
+    "chart.js": "^2.7.1",
     "core-js": "^2.4.1",
     "event-source-polyfill": "0.0.11",
+    "ng2-charts": "^1.6.0",
     "ngx-infinite-scroll": "^0.6.1",
     "rxjs": "^5.5.2",
     "zone.js": "^0.8.14"

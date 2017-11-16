@@ -7,6 +7,7 @@ import { HashLocationStrategy, Location, LocationStrategy } from '@angular/commo
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ChartsModule } from 'ng2-charts';
 
 import { FileSizePipe } from './file-size.pipe';
 import { AbbreviatePipe } from './abbreviate.pipe';
@@ -27,6 +28,7 @@ import { RandomBackgroundColorDirective } from './random-background-color.direct
 import { SearchbarComponent } from './search/searchbar.component';
 import { SearchresultsComponent } from './search/searchresults.component';
 import { TorrentDownloadComponent } from './list/torrent-download.component';
+import { TrustchainComponent } from './trustchain/trustchain.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -38,6 +40,7 @@ const routes: Routes = [
     { path: 'subscriptions', component: SubscriptionsComponent },
     { path: 'downloads', component: DownloadsComponent },
     { path: 'videoplayer', component: VideoplayerComponent },
+    { path: 'trustchain', component: TrustchainComponent },
 ];
 
 @NgModule({
@@ -60,7 +63,8 @@ const routes: Routes = [
         RandomBackgroundColorDirective,
         SearchbarComponent,
         SearchresultsComponent,
-        TorrentDownloadComponent
+        TorrentDownloadComponent,
+        TrustchainComponent
     ],
     imports: [
         BrowserModule,
@@ -69,7 +73,8 @@ const routes: Routes = [
         RouterModule.forRoot(routes),
         InfiniteScrollModule,
         NgxDatatableModule,
-        NgbModule.forRoot()
+        NgbModule.forRoot(),
+        ChartsModule
     ],
     providers: [Location,
         { provide: LocationStrategy, useClass: HashLocationStrategy }

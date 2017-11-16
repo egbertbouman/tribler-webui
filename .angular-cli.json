@@ -19,11 +19,12 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "../node_modules/bootstrap/dist/css/bootstrap.css",
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
         "styles.css"
       ],
       "scripts": [
-        "../node_modules/event-source-polyfill/src/eventsource.min.js"
+        "../node_modules/event-source-polyfill/src/eventsource.min.js",
+        "../node_modules/chart.js/dist/Chart.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

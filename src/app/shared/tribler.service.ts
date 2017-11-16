@@ -127,6 +127,14 @@ export class TriblerService {
             .map(res => res.json());
     }
 
+    getTrustchainStatistics(): Observable<Object[]> {
+        return this._http.get(this._api_base + '/multichain/statistics')
+            .map(res => res.json().statistics);
+    }
+    getTrustchainBlocks(user_id: string): Observable<Object[]> {
+        return this._http.get(this._api_base + `/multichain/blocks/${user_id}`)
+            .map(res => res.json().blocks);
+    }
 
     getEvents(): Observable<any[]> {
         console.log('events');

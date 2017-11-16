@@ -1,0 +1,58 @@
+<div class="header row align-items-center">
+    <h3 class="flex-grow">
+        Trust statistics
+    </h3>
+</div>
+
+<div class="header border-0">
+    <p class="mt-3">You can build trust by contributing to the Tribler network. This is done by exchanging data anonymously or by letting
+        Tribler run idle.</p>
+
+    <div class="row mt-3">
+        <div class="col-sm-6">
+            <div class="card border-secondary">
+                <div class="card-body">
+                    <p class="card-text">
+                        <span class="text-white">
+                            <strong>{{ statistics?.self_total_up_mb }} MBytes</strong>
+                        </span>
+                        <br> Given to the community
+                    </p>
+                    <p class="card-text">
+                        <span class="text-white">{{ statistics?.self_peers_helped }}</span>
+                        <br> People you helped
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card border-secondary">
+                <div class="card-body">
+                    <p class="card-text">
+                        <span class="text-white">
+                            <strong>{{ statistics?.self_total_down_mb }} MBytes</strong>
+                        </span>
+                        <br> Taken from the community
+                    </p>
+                    <p class="card-text">
+                        <span class="text-white">{{ statistics?.self_peers_helped_you }}</span>
+                        <br> People which helped you
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-sm-12">
+            <div class="card border-secondary">
+                <div class="card-body">
+                    <canvas baseChart width="500" height="500"
+                    [datasets]="chart_data"
+                    [options]="chart_options"
+                    [colors]="chart_colors"
+                    [chartType]="'line'"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

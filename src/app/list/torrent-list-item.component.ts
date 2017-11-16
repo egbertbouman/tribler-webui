@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -7,17 +7,38 @@ import { Torrent } from '../shared/torrent.model';
 import { FileSizePipe } from '../file-size.pipe';
 import { AbbreviatePipe } from '../abbreviate.pipe';
 import { TorrentDownloadComponent } from './torrent-download.component';
+import { HealthComponent } from '../shared/health.component';
 
 @Component({
     selector: 'torrent-item',
     templateUrl: './torrent-list-item.component.html',
     styleUrls: ['./list-item.css']
 })
-export class TorrentListItemComponent {
+export class TorrentListItemComponent implements OnInit {
     @Input() torrent: Torrent;
+    health;
+    health_checking = false;
 
     constructor(private _triblerService: TriblerService,
                 private _modalService: NgbModal) {
+    }
+
+    ngOnInit() {
+    }
+
+    @HostListener('click', ['$event.target'])
+    on_click(target: any) {
+        this.update_health();
+    }
+
+    update_health() {
+        this.health_checking = true;
+        this._triblerService.getTorrentHealth(this.torrent.infohash).subscribe(health => {
+            this.health = health;
+            this.health_checking = false;
+        }, error => {
+            this.health_checking = false;
+        });
     }
 
     play() {

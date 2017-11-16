@@ -41,6 +41,10 @@ button {
 .navbar {
     padding: 15px;
 }
+.badge.badge-outline {
+    background-color: transparent;
+    border: 1px solid currentColor;
+  }
 
 /* Table styles */
 .ngx-datatable .datatable-header, .ngx-datatable .datatable-body-row {

@@ -22,6 +22,7 @@ import { MyChannelComponent } from './mychannel/mychannel.component';
 import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
 import { VideoplayerComponent } from './videoplayer/videoplayer.component';
 import { TorrentListItemComponent } from './list/torrent-list-item.component';
+import { HealthComponent } from './shared/health.component';
 import { ChannelListItemComponent } from './list/channel-list-item.component';
 import { ListComponent } from './list/list.component';
 import { RandomBackgroundColorDirective } from './random-background-color.directive';
@@ -55,6 +56,7 @@ const routes: Routes = [
         SubscriptionsComponent,
         VideoplayerComponent,
         TorrentListItemComponent,
+        HealthComponent,
         ChannelListItemComponent,
         FileSizePipe,
         AbbreviatePipe,

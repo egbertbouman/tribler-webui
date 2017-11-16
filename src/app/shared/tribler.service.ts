@@ -74,8 +74,10 @@ export class TriblerService {
             .do(items => this.addType(items, 'playlist'));
     }
     getTorrentHealth(infohash: string){
-        return this._http.get(this._api_base + `/torrents/${infohash}/health?timeout=15`)
-            .map(res => res.json().overview);
+        var timeout = 15;
+        return this._http.get(this._api_base + `/torrents/${infohash}/health?timeout=${timeout}`)
+            .timeout(timeout * 1000)
+            .map(res => res.json().health);
     }
 
     getDownloads(): Observable<Download[]> {

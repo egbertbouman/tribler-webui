@@ -63,14 +63,6 @@ export class TriblerService {
         return this._http.delete(this._api_base + `/channels/subscribed/${id}`)
             .map(res => res.json());
     }
-    getMyChannel() {
-        return this._http.get(this._api_base + '/mychannel')
-            .map(res => res.json().mychannel);
-    }
-    createMyChannel(name: string, description: string) {
-        return this._http.put(this._api_base + '/channels/discovered', `name=${name}&description=${description}`)
-            .map(res => res.json());
-    }
     getTorrentsForChannel(id: string): Observable<Torrent[]> {
         return this._http.get(this._api_base + `/channels/discovered/${id}/torrents`)
             .map(res => res.json().torrents)
@@ -80,6 +72,10 @@ export class TriblerService {
         return this._http.get(this._api_base + `/channels/discovered/${id}/playlists`)
             .map(res => res.json().playlists)
             .do(items => this.addType(items, 'playlist'));
+    }
+    getTorrentHealth(infohash: string){
+        return this._http.get(this._api_base + `/torrents/${infohash}/health?timeout=15`)
+            .map(res => res.json().overview);
     }
 
     getDownloads(): Observable<Download[]> {
@@ -112,18 +108,20 @@ export class TriblerService {
             .map(res => res.json().metainfo);
     }
 
-    searchCompletions(term: string): Observable<Download[]> {
-        return this._http.get(this._api_base + `/search/completions?q=${encodeURI(term)}`)
-            .map(res => res.json().completions);
+    getMyChannel() {
+        return this._http.get(this._api_base + '/mychannel')
+            .map(res => res.json().mychannel);
     }
-    search(term: string): Observable<Download[]> {
-        this.searchQuery$.next(term);
-        // Clear the old search results
-        this.searchResults.length = 0;
-        while(this.searchResults.length > 0) {
-           this.searchResults.pop();
-        }
-        return this._http.get(this._api_base + `/search?q=${term}`)
+    createMyChannel(name: string, description: string) {
+        return this._http.put(this._api_base + '/channels/discovered', `name=${name}&description=${description}`)
+            .map(res => res.json());
+    }
+    updateMyChannel(name: string, description: string) {
+        return this._http.post(this._api_base + '/mychannel', `name=${name}&description=${description}`)
+            .map(res => res.json());
+    }
+    addToMyChannel(channel_id: string, uri: string) {
+        return this._http.put(this._api_base + `/channels/discovered/${channel_id}/torrents/${uri}`, '')
             .map(res => res.json());
     }
 
@@ -136,6 +134,20 @@ export class TriblerService {
             .map(res => res.json().blocks);
     }
 
+    search(term: string): Observable<Download[]> {
+        this.searchQuery$.next(term);
+        // Clear the old search results
+        this.searchResults.length = 0;
+        while(this.searchResults.length > 0) {
+           this.searchResults.pop();
+        }
+        return this._http.get(this._api_base + `/search?q=${term}`)
+            .map(res => res.json());
+    }
+    searchCompletions(term: string): Observable<Download[]> {
+        return this._http.get(this._api_base + `/search/completions?q=${encodeURI(term)}`)
+            .map(res => res.json().completions);
+    }
     getEvents(): Observable<any[]> {
         console.log('events');
         return Observable.create(observer => {

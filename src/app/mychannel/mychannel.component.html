@@ -5,7 +5,7 @@
     <button class="btn btn-sm btn-outline-tribler"
         [class.disabled]="mychannel"
         [disabled]="mychannel"
-        (click)="create_channel_modal(content)">Create</button>
+        (click)="open_mychannel_modal(content)">Create</button>
 </div>
 <div *ngIf="!mychannel" class="header border-0">You don't currently have your own channel.</div>
 <div *ngIf="mychannel" class="header border-0">
@@ -64,3 +64,29 @@
         </ngb-tab>
     </ngb-tabset>
 </div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title">Create channel</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="form-group">
+                    <label class="control-label">Name</label>
+                    <input type="text" class="form-control" [(ngModel)]="channel_name" [ngModelOptions]="{standalone: true}">
+                </div>
+                <div class="form-group">
+                        <label class="control-label">Description</label>
+                        <input type="text" class="form-control" [(ngModel)]="channel_description" [ngModelOptions]="{standalone: true}">
+                    </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-tribler" (click)="create_mychannel(); c()">Add</button>
+            <button type="button" class="btn btn-outline-tribler" (click)="c('Close click')">Cancel</button>
+        </div>
+    </ng-template>
+    

@@ -9,8 +9,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
     styleUrls: ['./torrent-download.component.css']
 })
 export class TorrentDownloadComponent implements OnInit {
-    _torrent;
-    magnet;
+    _magnet;
     torrent_files;
     error = '';
 
@@ -28,10 +27,9 @@ export class TorrentDownloadComponent implements OnInit {
     }
 
     @Input()
-    set torrent(torrent: any) {
-      this._torrent = torrent;
-      this.magnet = `magnet:?xt=urn:btih:${torrent.infohash}&dn=${torrent.name}`
-      this.triblerService.getTorrentInfo(this.magnet).subscribe(
+    set magnet(magnet: any) {
+      this._magnet = magnet;
+      this.triblerService.getTorrentInfo(this._magnet).subscribe(
             data => {
                 this.torrent_files = data.info.files || [{path: [data.info.name], length: data.info.length}];
                 this.error = '';
@@ -53,7 +51,7 @@ export class TorrentDownloadComponent implements OnInit {
 
         this.activeModal.close('Download')
         this._router.navigateByUrl("/downloads");
-        this.triblerService.startDownload(this.location, this.magnet, this.hops, selected_files)
+        this.triblerService.startDownload(this.location, this._magnet, this.hops, selected_files)
             .subscribe();
     }
 }

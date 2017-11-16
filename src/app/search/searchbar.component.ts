@@ -5,6 +5,9 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+import { TorrentDownloadComponent } from '../list/torrent-download.component';
 import { TriblerService } from '../shared/tribler.service';
 
 @Component({
@@ -14,6 +17,7 @@ import { TriblerService } from '../shared/tribler.service';
 })
 export class SearchbarComponent implements OnInit {
     public query: string;
+    magnet;
 
     completions = (text$: Observable<string>) =>
         text$
@@ -29,10 +33,23 @@ export class SearchbarComponent implements OnInit {
 
 
     constructor(private _triblerService: TriblerService,
-                private _router: Router) {
+                private _router: Router,
+                private _modalService: NgbModal) {
     }
 
     ngOnInit() {
+    }
+
+    open_magnet_modal(content) {
+        this.magnet = undefined;
+        const modalRef = this._modalService.open(content);
+    }
+
+    add_magnet() {
+        const modalRef = this._modalService.open(TorrentDownloadComponent, {size: 'lg'});
+        // The service needs to be set first
+        modalRef.componentInstance.triblerService = this._triblerService;
+        modalRef.componentInstance.magnet = this.magnet
     }
 
     search() {

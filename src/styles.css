@@ -35,8 +35,11 @@ button {
 .header {
     border-bottom: 1px solid black;
     margin: 0px;
-    padding: 3px 10px !important;
+    padding: 3px 15px !important;
     color: #ccc;
+}
+.navbar {
+    padding: 15px;
 }
 
 /* Table styles */

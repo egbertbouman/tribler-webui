@@ -26,6 +26,7 @@ export class SubscriptionsComponent implements OnInit {
     }
 
     open_channel_modal(content) {
+        this.channel_id = undefined;
         this._modalService.open(content);
     }
 

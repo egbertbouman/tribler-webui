@@ -44,7 +44,10 @@ button {
 .badge.badge-outline {
     background-color: transparent;
     border: 1px solid currentColor;
-  }
+}
+.bg-black {
+    background-color: black;
+}
 
 /* Table styles */
 .ngx-datatable .datatable-header, .ngx-datatable .datatable-body-row {
@@ -85,6 +88,9 @@ button {
     display: flex !important;
     flex: 1 !important;
     flex-direction: column !important;
+}
+.ngx-datatable .datatable-body .empty-row {
+    margin-left: 10px;
 }
 
 /* Modal styles */

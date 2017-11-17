@@ -136,6 +136,11 @@ export class TriblerService {
             .map(res => res.json().blocks);
     }
 
+    getVariables(): Observable<Object[]> {
+        return this._http.get(this._api_base + '/variables')
+            .map(res => res.json().variables);
+    }
+
     search(term: string): Observable<Download[]> {
         this.searchQuery$.next(term);
         // Clear the old search results

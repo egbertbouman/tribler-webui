@@ -15,9 +15,9 @@
             </span>
         </div>
     </form>
-    <button class="btn btn-outline-tribler ml-1" type="button" [routerLink]="['trustchain']"><span class="fa fa-star"></span></button>
-    <button class="btn btn-outline-tribler ml-1" type="button" (click)="search()"><span class="fa fa-cog"></span></button>
-    <button class="btn btn-outline-tribler ml-1" type="button" (click)="openMagnetModal(content)"><span class="fa fa-plus"></span></button>
+    <button class="btn btn-outline-tribler ml-1" type="button" title="TrustChain" [routerLink]="['trustchain']"><span class="fa fa-star"></span></button>
+    <button class="btn btn-outline-tribler ml-1" type="button" title="Settings"><span class="fa fa-cog"></span></button>
+    <button class="btn btn-outline-tribler ml-1" type="button" title="Add magnet/HTTP link" (click)="openMagnetModal(content)"><span class="fa fa-plus"></span></button>
 </nav>
 
 <ng-template #content let-c="close" let-d="dismiss">

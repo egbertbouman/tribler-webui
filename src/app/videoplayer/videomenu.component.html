@@ -1,0 +1,12 @@
+<small *ngIf="router.url.startsWith('/videoplayer')">
+    <ul *ngIf="download" class="list-group videomenu">
+        <li class="list-group-item text-truncate text-white">Video playlist</li>
+        <li *ngFor="let file of download.files | videofile | orderBy: 'name':false" class="list-group-item text-truncate"
+            [title]="file.name">
+            <a [routerLink]="['videoplayer', download.infohash, file.index]"
+               [class.text-muted]="file.included">
+               {{ file.name }}
+            </a>
+        </li>
+    </ul>
+</small>

@@ -1,10 +1,11 @@
 <div class="header row align-items-center">
     <h3 class="flex-grow">Downloads</h3>
     <div class="align-middle">
-        <button type="button" class="btn btn-outline-tribler" (click)="resumeDownload()"><div class="fa fa-play"></div></button>
-        <button type="button" class="btn btn-outline-tribler" (click)="stopDownload()"><div class="fa fa-stop"></div></button>
-        <button type="button" class="btn btn-outline-tribler" (click)="removeDownload(false)"><div class="fa fa-remove"></div></button>
-        <button type="button" class="btn btn-outline-tribler" (click)="removeDownload(true)"><div class="fa fa-trash"></div></button>
+        <button type="button" class="btn btn-outline-tribler" title="Stream" [routerLink]="['/videoplayer', selected[0]?.infohash, 0]"><div class="fa fa-video-camera"></div></button>
+        <button type="button" class="btn btn-outline-tribler" title="Resume" (click)="resumeDownload()"><div class="fa fa-play"></div></button>
+        <button type="button" class="btn btn-outline-tribler" title="Stop" (click)="stopDownload()"><div class="fa fa-stop"></div></button>
+        <button type="button" class="btn btn-outline-tribler" title="Remove" (click)="removeDownload(false)"><div class="fa fa-remove"></div></button>
+        <button type="button" class="btn btn-outline-tribler" title="Remove (including data)" (click)="removeDownload(true)"><div class="fa fa-trash"></div></button>
     </div>
 </div>
 
@@ -20,13 +21,13 @@
     (activate)="onActivate($event)"
     (select)='onSelect($event)'>
 
-    <ngx-datatable-column prop="name" name="Name" [minWidth]="150" [canAutoResize]="false"></ngx-datatable-column>
-    <ngx-datatable-column prop="size" name="Size" [canAutoResize]="false">
+    <ngx-datatable-column prop="name" name="Name" [width]="200" [canAutoResize]="false"></ngx-datatable-column>
+    <ngx-datatable-column prop="size" name="Size" [width]="100" [canAutoResize]="false">
         <ng-template let-value="value" ngx-datatable-cell-template>
             {{ value | fileSize }}
         </ng-template>
     </ngx-datatable-column>
-    <ngx-datatable-column class="column" prop="progress" name="Progress" [canAutoResize]="false">
+    <ngx-datatable-column prop="progress" name="Progress" [width]="125" [canAutoResize]="false">
         <ng-template let-value="value" ngx-datatable-cell-template>
             <div class="progress">
                 <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar"
@@ -38,22 +39,22 @@
         </ng-template>
     </ngx-datatable-column>
     <ngx-datatable-column prop="status" name="Status" [canAutoResize]="false">
-        <ng-template let-value="value" ngx-datatable-cell-template>
-            {{ value | downloadStatus }}
+        <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+            {{ row.vod_mode ? 'Streaming' : (value | downloadStatus) }}
         </ng-template>
     </ngx-datatable-column>
-    <ngx-datatable-column prop="speed_down" name="&darr; Speed" [canAutoResize]="false">
-        <ng-template let-value="value" ngx-datatable-cell-template>
-            {{ value | fileSize:1 }}/s
-        </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column prop="speed_up" name="&uarr; Speed" [canAutoResize]="false">
+    <ngx-datatable-column prop="speed_down" name="&darr; Speed" [width]="100" [canAutoResize]="false">
         <ng-template let-value="value" ngx-datatable-cell-template>
             {{ value | fileSize:1 }}/s
         </ng-template>
     </ngx-datatable-column>
-    <ngx-datatable-column prop="num_seeds" name="Seeds" [canAutoResize]="false"></ngx-datatable-column>
-    <ngx-datatable-column prop="num_peers" name="Peers" [canAutoResize]="false"></ngx-datatable-column>
-    <ngx-datatable-column prop="hops" name="Hops" [canAutoResize]="false"></ngx-datatable-column>
+    <ngx-datatable-column prop="speed_up" name="&uarr; Speed" [width]="100" [canAutoResize]="false">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+            {{ value | fileSize:1 }}/s
+        </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column prop="num_seeds" name="Seeds" [width]="70" [canAutoResize]="false"></ngx-datatable-column>
+    <ngx-datatable-column prop="num_peers" name="Peers" [width]="70" [canAutoResize]="false"></ngx-datatable-column>
+    <ngx-datatable-column prop="hops" name="Hops" [width]="70" [canAutoResize]="false"></ngx-datatable-column>
 </ngx-datatable>
 <download-details *ngIf="selected[0]" [download]="selected[0]"></download-details>

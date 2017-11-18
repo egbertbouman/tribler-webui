@@ -35,11 +35,11 @@ button {
 .header {
     border-bottom: 1px solid black;
     margin: 0px;
-    padding: 3px 15px !important;
+    padding: 3px 10px !important;
     color: #ccc;
 }
 .navbar {
-    padding: 15px;
+    padding: 15px 10px 15px 15px;
 }
 .badge.badge-outline {
     background-color: transparent;
@@ -78,9 +78,6 @@ button {
 .ngx-datatable .datatable-body {
     flex: 1;
 }
-.ngx-datatable .datatable-body-cell {
-    margin-right: 10px;
-}
 .ngx-datatable .datatable-header {
     flex: 0 0 auto;
 }
@@ -91,6 +88,29 @@ button {
 }
 .ngx-datatable .datatable-body .empty-row {
     margin-left: 10px;
+}
+
+.ngx-datatable .datatable-body-cell:not(:last-child)  {
+    padding-right: 10px;
+    text-overflow: ellipsis;
+}
+.ngx-datatable .datatable-header-cell {
+	width: 100%
+}
+.ngx-datatable .datatable-header-cell span {
+    display: inline-block;
+}
+.ngx-datatable .datatable-header-cell span span {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.ngx-datatable  .datatable-body-cell-label {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	width: 100%;
 }
 
 /* Modal styles */

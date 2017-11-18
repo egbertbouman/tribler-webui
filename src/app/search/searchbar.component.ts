@@ -47,10 +47,12 @@ export class SearchbarComponent implements OnInit {
     }
 
     addMagnet() {
-        const modalRef = this.modalService.open(TorrentDownloadComponent, {size: 'lg'});
-        // The service needs to be set first
-        modalRef.componentInstance.triblerService = this.triblerService;
-        modalRef.componentInstance.magnet = this.magnet;
+        if (this.magnet) {
+            const modalRef = this.modalService.open(TorrentDownloadComponent, {size: 'lg'});
+            // The service needs to be set first
+            modalRef.componentInstance.triblerService = this.triblerService;
+            modalRef.componentInstance.magnet = this.magnet;
+        }
     }
 
     search() {

@@ -21,6 +21,7 @@ declare var EventSource: any;
 @Injectable()
 export class TriblerService {
     apiBase = '//localhost:8085';
+
     searchResults = [];
     searchQuery;
 
@@ -33,7 +34,7 @@ export class TriblerService {
         this.getDownloads();
         this.searchQuery = new ReplaySubject(1);
         this.downloads = new ReplaySubject(1);
-    }
+     }
 
     addType(objects: any[], type: string) {
         // Torrents / channels / playlists need a type so that we can distinguish between them
@@ -104,9 +105,9 @@ export class TriblerService {
    // Download management
 
     startDownload(destination: string, uri: string, hops: number, selectedFiles: string[]): Observable<string> {
-        let body = `anon_hops=${hops}&safe_seeding=1&destination=${destination}&uri=${uri}`;
+        let body = `anon_hops=${hops}&safe_seeding=1&destination=${encodeURIComponent(destination)}&uri=${encodeURIComponent(uri)}`;
         for (const file of selectedFiles) {
-            body += '&selected_files[]=' + file;
+            body += '&selected_files[]=' + encodeURIComponent(file);
         }
         return this.http.put(this.apiBase + '/downloads', body)
             .map(res => res.json());

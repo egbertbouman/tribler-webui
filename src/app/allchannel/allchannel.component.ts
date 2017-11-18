@@ -13,6 +13,6 @@ export class AllChannelComponent implements OnInit {
 
     ngOnInit() {
          this.triblerService.getChannels()
-             .subscribe(channels => this.channels = channels );
+             .subscribe(channels => this.channels = channels);
     }
 }

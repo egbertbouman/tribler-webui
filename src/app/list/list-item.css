@@ -1,7 +1,7 @@
 .listitem {
     border-bottom: 1px solid black;
     margin: 0px;
-    padding: 3px 15px !important;
+    padding: 3px 10px !important;
     color: #ccc;
     text-overflow: hidden;
 }

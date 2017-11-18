@@ -35,24 +35,26 @@ export class TorrentDownloadComponent implements OnInit {
                 this.torrentFiles = data.info.files || [{path: [data.info.name], length: data.info.length}];
                 this.error = '';
             },
-            error => {
+            err => {
                  this.torrentFiles = undefined;
-                 this.error = 'Error while trying to fetch torrent';
+                 this.error = 'Error: ' + JSON.parse(err._body).error.message;
             }
         );
     }
 
     download() {
         const selectedFiles = [];
-        this.torrentFiles.forEach(function(value, index) {
-            if (!value.excluded) {
-                selectedFiles.push(value.path[0]);
-            }
-        });
+        if (this.torrentFiles) {
+            this.torrentFiles.forEach(function(value, index) {
+                if (!value.excluded) {
+                    selectedFiles.push(value.path[0]);
+                }
+            });
+        }
 
         this.activeModal.close('Download');
         this.router.navigateByUrl('/downloads');
-        this.triblerService.startDownload(this.location, this.magnet, this.hops, selectedFiles)
+        this.triblerService.startDownload(this.location, this._magnet, this.hops, selectedFiles)
             .subscribe();
     }
 }

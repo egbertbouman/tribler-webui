@@ -1,0 +1,17 @@
+.videomenu .list-group-item {
+    background-color: #111;
+    padding: 5px 5px 5px 20px;
+}
+.videomenu .list-group-item:first-child {
+    border-bottom: 2px solid #333;
+}
+.videomenu .list-group-item a {
+    color: #fff;
+}
+.videomenu .list-group-item a:hover {
+    color: #e67300;
+}
+a.disabled {
+    pointer-events: none;
+    cursor: default;
+ }

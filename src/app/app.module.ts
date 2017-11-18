@@ -12,6 +12,7 @@ import { ChartsModule } from 'ng2-charts';
 
 import { FileSizePipe } from './shared/file-size.pipe';
 import { AbbreviatePipe } from './shared/abbreviate.pipe';
+import { VideofilePipe } from './shared/videofile.pipe';
 import { DownloadStatusPipe } from './shared/download-status.pipe';
 import { AppComponent } from './app.component';
 import { ChannelComponent } from './channel/channel.component';
@@ -21,6 +22,7 @@ import { DownloadsComponent } from './downloads/downloads.component';
 import { DownloadDetailsComponent } from './downloads/download-details.component';
 import { MyChannelComponent } from './mychannel/mychannel.component';
 import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
+import { VideomenuComponent } from './videoplayer/videomenu.component';
 import { VideoplayerComponent } from './videoplayer/videoplayer.component';
 import { TorrentListItemComponent } from './list/torrent-list-item.component';
 import { HealthComponent } from './shared/health.component';
@@ -42,6 +44,7 @@ const routes: Routes = [
     { path: 'subscriptions', component: SubscriptionsComponent },
     { path: 'downloads', component: DownloadsComponent },
     { path: 'videoplayer', component: VideoplayerComponent },
+    { path: 'videoplayer/:id1/:id2', component: VideoplayerComponent },
     { path: 'trustchain', component: TrustchainComponent },
 ];
 
@@ -55,12 +58,14 @@ const routes: Routes = [
         DownloadDetailsComponent,
         MyChannelComponent,
         SubscriptionsComponent,
+        VideomenuComponent,
         VideoplayerComponent,
         TorrentListItemComponent,
         HealthComponent,
         ChannelListItemComponent,
         FileSizePipe,
         AbbreviatePipe,
+        VideofilePipe,
         DownloadStatusPipe,
         ListComponent,
         RandomBackgroundColorDirective,

@@ -19,8 +19,8 @@
         </div>
     </form>
     <p *ngIf="error" class="text-center">Could not download torrent</p>
-    <p *ngIf="!torrent_files" class="text-center"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i> Downloading torrent...</p>
-    <table *ngIf="torrent_files" class="table m-0" style="background-color: #333">
+    <p *ngIf="!torrentFiles" class="text-center"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i> Downloading torrent...</p>
+    <table *ngIf="torrentFiles" class="table m-0" style="background-color: #333">
         <thead>
             <tr>
                 <th>Path</th>
@@ -29,7 +29,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let file of torrent_files | orderBy: 'path':false">
+            <tr *ngFor="let file of torrentFiles | orderBy: 'path':false">
                 <td>{{ file.path }}</td>
                 <td>{{ file.length | fileSize:1 }}</td>
                 <td><input type="checkbox" checked="checked" class="form-check-input ml-0" (change)="file.excluded = !file.excluded"></td>

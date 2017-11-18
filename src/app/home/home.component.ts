@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TriblerService } from '../shared/tribler.service';
-import { Observable } from 'rxjs/Rx';
 
-declare var EventSource: any
+declare var EventSource: any;
 
 @Component({
     selector: 'home',
@@ -11,13 +10,13 @@ declare var EventSource: any
 export class HomeComponent implements OnInit {
     items = [];
 
-    constructor(private _triblerService: TriblerService) {
+    constructor(private triblerService: TriblerService) {
     }
 
     ngOnInit() {
-         this._triblerService.getRandomTorrents()
+         this.triblerService.getRandomTorrents()
              .subscribe(torrents => this.items = this.items.concat(torrents));
-         this._triblerService.getPopularChannels()
+         this.triblerService.getPopularChannels()
              .subscribe(channels => this.items = this.items.concat(channels));
     }
 }

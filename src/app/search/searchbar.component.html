@@ -17,7 +17,7 @@
     </form>
     <button class="btn btn-outline-tribler ml-1" type="button" [routerLink]="['trustchain']"><span class="fa fa-star"></span></button>
     <button class="btn btn-outline-tribler ml-1" type="button" (click)="search()"><span class="fa fa-cog"></span></button>
-    <button class="btn btn-outline-tribler ml-1" type="button" (click)="open_magnet_modal(content)"><span class="fa fa-plus"></span></button>
+    <button class="btn btn-outline-tribler ml-1" type="button" (click)="openMagnetModal(content)"><span class="fa fa-plus"></span></button>
 </nav>
 
 <ng-template #content let-c="close" let-d="dismiss">
@@ -36,7 +36,7 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-tribler" (click)="add_magnet(); c()">Add</button>
+        <button type="button" class="btn btn-outline-tribler" (click)="addMagnet(); c()">Add</button>
         <button type="button" class="btn btn-outline-tribler" (click)="c('Close click')">Cancel</button>
     </div>
 </ng-template>

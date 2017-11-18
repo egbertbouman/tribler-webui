@@ -12,19 +12,19 @@ export class ChannelComponent implements OnInit {
     items = [];
 
     constructor(
-        private _triblerService: TriblerService,
-        private _activatedRoute: ActivatedRoute) {
+        private triblerService: TriblerService,
+        private activatedRoute: ActivatedRoute) {
     }
 
     ngOnInit() {
-        this._activatedRoute.params
+        this.activatedRoute.params
             .map(params => params['id'])
             .subscribe(id => {
-                this._triblerService.getChannel(id)
+                this.triblerService.getChannel(id)
                     .subscribe(channel => this.channel = channel);
-                this._triblerService.getTorrentsForChannel(id)
+                this.triblerService.getTorrentsForChannel(id)
                     .subscribe(torrents => this.items = this.items.concat(torrents));
-                this._triblerService.getPlaylistsForChannel(id)
+                this.triblerService.getPlaylistsForChannel(id)
                     .subscribe(playlists => this.items = this.items.concat(playlists));
             });
     }

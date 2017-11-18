@@ -1,28 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Component, HostBinding, OnInit } from '@angular/core';
 
 import { TriblerService } from '../shared/tribler.service';
 
 @Component({
     selector: 'downloads',
     templateUrl: './downloads.component.html',
-    styleUrls: ['./downloads.component.css'],
-    host: { 'class': 'd-flex flex-column flex-grow' }
+    styleUrls: ['./downloads.component.css']
 })
 export class DownloadsComponent implements OnInit {
     downloads = [];
     selected = [];
 
-    constructor(private _triblerService: TriblerService) {
+    @HostBinding('class')
+    someBaseClass = 'd-flex flex-column flex-grow';
+
+    constructor(private triblerService: TriblerService) {
     }
 
     ngOnInit() {
-        return this._triblerService.downloads.subscribe(downloads => {
+        return this.triblerService.downloads.subscribe(downloads => {
             this.downloads = downloads;
 
-            var selected = this.selected[0];
+            const selected = this.selected[0];
             if (selected !== undefined) {
-                var self = this;
+                const self = this;
                 this.selected[0] = undefined;
                 this.downloads.forEach(function (value, index) {
                     if (value && selected.infohash === value.infohash) {
@@ -32,26 +33,26 @@ export class DownloadsComponent implements OnInit {
             }
         });
     }
-    
+
     resumeDownload() {
         if (this.selected[0] === undefined) {
             return;
         }
-        this._triblerService.resumeDownload(this.selected[0].infohash).subscribe();
+        this.triblerService.resumeDownload(this.selected[0].infohash).subscribe();
     }
 
     stopDownload() {
         if (this.selected[0] === undefined) {
             return;
         }
-        this._triblerService.stopDownload(this.selected[0].infohash).subscribe();
+        this.triblerService.stopDownload(this.selected[0].infohash).subscribe();
     }
 
-    removeDownload(remove_data: boolean) {
+    removeDownload(removeData: boolean) {
         if (this.selected[0] === undefined) {
             return;
         }
-        this._triblerService.removeDownload(this.selected[0].infohash, remove_data).subscribe();
+        this.triblerService.removeDownload(this.selected[0].infohash, removeData).subscribe();
     }
 
     onSelect({ selected }) {

@@ -8,11 +8,11 @@ import { TriblerService } from '../shared/tribler.service';
 export class AllChannelComponent implements OnInit {
     channels = [];
 
-    constructor(private _triblerService: TriblerService) {
+    constructor(private triblerService: TriblerService) {
     }
 
     ngOnInit() {
-         this._triblerService.getChannels()
+         this.triblerService.getChannels()
              .subscribe(channels => this.channels = channels );
     }
 }

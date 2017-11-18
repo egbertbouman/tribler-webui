@@ -104,7 +104,7 @@
                         <td>{{ peer.completed * 100 | number:'1.0-1' }}%</td>
                         <td>{{ peer.downrate | fileSize:1 }}</td>
                         <td>{{ peer.uprate | fileSize:1 }}</td>
-                        <td>{{ get_state(peer) }}</td>
+                        <td>{{ getState(peer) }}</td>
                         <td>{{ peer.extended_version }}</td>
                     </tr>
                 </tbody>

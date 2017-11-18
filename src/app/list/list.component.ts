@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { Location } from '@angular/common';
 
 @Component({
@@ -6,8 +6,8 @@ import { Location } from '@angular/common';
     templateUrl: './list.component.html',
     styleUrls: ['./list.component.css']
 })
-export class ListComponent implements OnInit {
-    @Input() title = "";
+export class ListComponent implements OnInit, OnChanges {
+    @Input() title = '';
     @Input() items = [];
     @Input() showBackButton = false;
     @Input() showHeader = true;
@@ -16,7 +16,7 @@ export class ListComponent implements OnInit {
     throttle = 300;
     scrollDistance = 2;
 
-    constructor(private _location: Location) {
+    constructor(private location: Location) {
     }
 
     ngOnInit() {
@@ -32,11 +32,10 @@ export class ListComponent implements OnInit {
     }
 
     back() {
-        this._location.back();
+        this.location.back();
     }
 
     trackByFn(index, item) {
-        //console.log('TRACKBY!!!!!!!!!!!!! '+index + ' ' + item);
         return index; // or item.id
     }
 }

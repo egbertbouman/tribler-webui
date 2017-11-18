@@ -13,6 +13,7 @@ import { Component, OnInit, Input } from '@angular/core';
     `
 })
 export class HealthComponent implements OnInit {
+    // tslint:disable-next-line:variable-name
     _health;
 
     constructor() { }
@@ -22,16 +23,21 @@ export class HealthComponent implements OnInit {
 
     @Input()
     set health(health: any) {
-        if (health === undefined)
+        if (health === undefined) {
             return;
+        }
         health.seeders = 0;
         health.leechers = 0;
-        for (var key in health) {
-            var value = health[key];
-            if (!isNaN(value.seeders))
-                health.seeders = Math.max(health.seeders, value.seeders);
-            if (!isNaN(value.leechers))
-                health.leechers = Math.max(health.leechers, value.leechers);
+        for (const key in health) {
+            if (health.hasOwnProperty(key)) {
+                const value = health[key];
+                if (!isNaN(value.seeders)) {
+                    health.seeders = Math.max(health.seeders, value.seeders);
+                }
+                if (!isNaN(value.leechers)) {
+                    health.leechers = Math.max(health.leechers, value.leechers);
+                }
+            }
         }
         this._health = health;
     }

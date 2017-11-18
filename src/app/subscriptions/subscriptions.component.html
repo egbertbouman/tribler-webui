@@ -2,7 +2,7 @@
     <h3 class="flex-grow">
         Subscribed channels
     </h3>
-    <button class="btn btn-sm btn-outline-tribler" (click)="open_channel_modal(content)">Add</button>
+    <button class="btn btn-sm btn-outline-tribler" (click)="openChannelModal(content)">Add</button>
 </div>
 <div *ngIf="channels.length === 0" class="header border-0">You are not subscribed to any channel.</div>
 <list [title]="'Subscribed channels'" [items]="channels" [showHeader]="false"></list>
@@ -18,12 +18,12 @@
         <form>
             <div class="form-group">
                 <label class="control-label">Channel ID</label>
-                <input type="text" class="form-control" [(ngModel)]="channel_id" [ngModelOptions]="{standalone: true}">
+                <input type="text" class="form-control" [(ngModel)]="channelId" [ngModelOptions]="{standalone: true}">
             </div>
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-tribler" (click)="add_channel(); c()">Add</button>
+        <button type="button" class="btn btn-outline-tribler" (click)="addChannel(); c()">Add</button>
         <button type="button" class="btn btn-outline-tribler" (click)="c('Close click')">Cancel</button>
     </div>
 </ng-template>

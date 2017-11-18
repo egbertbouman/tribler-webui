@@ -11,19 +11,18 @@ import { TriblerService } from '../shared/tribler.service';
 export class ChannelListItemComponent {
     @Input() channel: Channel;
 
-    constructor(private _triblerService: TriblerService) {
+    constructor(private triblerService: TriblerService) {
     }
 
-    toggle_subscription(event) {
+    toggleSubscription(event) {
         if (this.channel.subscribed) {
-            this._triblerService.unsubscribeChannel(this.channel.dispersy_cid).subscribe(
-                data => { this.channel.subscribed = false; this.channel.votes -= 1 },
+            this.triblerService.unsubscribeChannel(this.channel.dispersy_cid).subscribe(
+                data => { this.channel.subscribed = false; this.channel.votes -= 1; },
                 error => console.log(error)
             );
-        }
-        else {
-            this._triblerService.subscribeChannel(this.channel.dispersy_cid).subscribe(
-                data => { this.channel.subscribed = true; this.channel.votes += 1 },
+        } else {
+            this.triblerService.subscribeChannel(this.channel.dispersy_cid).subscribe(
+                data => { this.channel.subscribed = true; this.channel.votes += 1; },
                 error => console.log(error)
             );
         }

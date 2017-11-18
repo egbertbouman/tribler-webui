@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch'
+import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
@@ -25,37 +26,36 @@ export class SearchbarComponent implements OnInit {
             .debounceTime(300)
             .distinctUntilChanged()
             .switchMap(term =>
-                this._triblerService.searchCompletions(term)
+                this.triblerService.searchCompletions(term)
                     .catch(() => {
                         return Observable.of([]);
                     })
                     .map((completions: any) => [term].concat(completions))
-            );
+            )
 
-
-    constructor(private _triblerService: TriblerService,
-                private _router: Router,
-                private _modalService: NgbModal) {
+    constructor(private triblerService: TriblerService,
+                private router: Router,
+                private modalService: NgbModal) {
     }
 
     ngOnInit() {
     }
 
-    open_magnet_modal(content) {
+    openMagnetModal(content) {
         this.magnet = undefined;
-        const modalRef = this._modalService.open(content);
+        const modalRef = this.modalService.open(content);
     }
 
-    add_magnet() {
-        const modalRef = this._modalService.open(TorrentDownloadComponent, {size: 'lg'});
+    addMagnet() {
+        const modalRef = this.modalService.open(TorrentDownloadComponent, {size: 'lg'});
         // The service needs to be set first
-        modalRef.componentInstance.triblerService = this._triblerService;
-        modalRef.componentInstance.magnet = this.magnet
+        modalRef.componentInstance.triblerService = this.triblerService;
+        modalRef.componentInstance.magnet = this.magnet;
     }
 
     search() {
-        this._router.navigateByUrl("/search");
-        this._triblerService.search(this.query).subscribe(
+        this.router.navigateByUrl('/search');
+        this.triblerService.search(this.query).subscribe(
             data => console.log(data),
             error => console.log(error)
         );

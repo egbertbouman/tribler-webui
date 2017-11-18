@@ -9,7 +9,7 @@
   </div>
   <div class="col-xs d-flex align-items-center">
       <div class="pull-right">
-          <div class="fa fa-heart" (click)="toggle_subscription($event)"
+          <div class="fa fa-heart" (click)="toggleSubscription($event)"
               [class.subscribed]="channel.subscribed" [class.unsubscribed]="!channel.subscribed"></div>
            <small> {{ channel.votes }} votes</small>
         </div>

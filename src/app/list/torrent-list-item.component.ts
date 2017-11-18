@@ -4,8 +4,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { TriblerService } from '../shared/tribler.service';
 import { Torrent } from '../shared/torrent.model';
-import { FileSizePipe } from '../file-size.pipe';
-import { AbbreviatePipe } from '../abbreviate.pipe';
 import { TorrentDownloadComponent } from './torrent-download.component';
 import { HealthComponent } from '../shared/health.component';
 
@@ -17,38 +15,38 @@ import { HealthComponent } from '../shared/health.component';
 export class TorrentListItemComponent implements OnInit {
     @Input() torrent: Torrent;
     health;
-    health_checking = false;
+    healthChecking = false;
 
-    constructor(private _triblerService: TriblerService,
-                private _modalService: NgbModal) {
+    constructor(private triblerService: TriblerService,
+                private modalService: NgbModal) {
     }
 
     ngOnInit() {
     }
 
     @HostListener('click', ['$event.target'])
-    on_click(target: any) {
-        this.update_health();
+    onClick(target: any) {
+        this.updateHealth();
     }
 
-    update_health() {
-        this.health_checking = true;
-        this._triblerService.getTorrentHealth(this.torrent.infohash).subscribe(health => {
+    updateHealth() {
+        this.healthChecking = true;
+        this.triblerService.getTorrentHealth(this.torrent.infohash).subscribe(health => {
             this.health = health;
-            this.health_checking = false;
+            this.healthChecking = false;
         }, error => {
-            this.health_checking = false;
+            this.healthChecking = false;
         });
     }
 
     play() {
-        console.log("play " + this.torrent.infohash);
+        console.log('play ' + this.torrent.infohash);
     }
 
-    open_download_modal(torrent) {
-        const modalRef = this._modalService.open(TorrentDownloadComponent, {size: 'lg'});
+    openDownloadModal(torrent) {
+        const modalRef = this.modalService.open(TorrentDownloadComponent, {size: 'lg'});
         // The service needs to be set first
-        modalRef.componentInstance.triblerService = this._triblerService;
+        modalRef.componentInstance.triblerService = this.triblerService;
         modalRef.componentInstance.magnet = `magnet:?xt=urn:btih:${torrent.infohash}&dn=${torrent.name}`;
     }
 }

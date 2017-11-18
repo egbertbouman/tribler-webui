@@ -10,10 +10,10 @@ import { TriblerService } from '../shared/tribler.service';
 })
 export class SubscriptionsComponent implements OnInit {
     channels = [];
-    channel_id;
+    channelId;
 
-    constructor(private _triblerService: TriblerService,
-                private _modalService: NgbModal) {
+    constructor(private triblerService: TriblerService,
+                private modalService: NgbModal) {
     }
 
     ngOnInit() {
@@ -21,21 +21,21 @@ export class SubscriptionsComponent implements OnInit {
     }
 
     refreshSubscribedChannels() {
-        this._triblerService.getSubscribedChannels()
-            .subscribe(channels => this.channels = channels );
+        this.triblerService.getSubscribedChannels()
+            .subscribe(channels => this.channels = channels);
     }
 
-    open_channel_modal(content) {
-        this.channel_id = undefined;
-        this._modalService.open(content);
+    openChannelModal(content) {
+        this.channelId = undefined;
+        this.modalService.open(content);
     }
 
-    add_channel() {
-        if (this.channel_id !== undefined) {
-            this._triblerService.subscribeChannel(this.channel_id).subscribe(
+    addChannel() {
+        if (this.channelId !== undefined) {
+            this.triblerService.subscribeChannel(this.channelId).subscribe(
                 data => this.refreshSubscribedChannels(),
                 error => console.log(error)
             );
-        };
+        }
     }
 }

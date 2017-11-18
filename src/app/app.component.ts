@@ -1,21 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
 import { TriblerService } from './shared/tribler.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  providers: [TriblerService]
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    providers: [TriblerService]
 })
-export class AppComponent {
-    constructor(private _router: Router,
+export class AppComponent implements OnInit {
+    constructor(private router: Router,
                 public triblerService: TriblerService) {
     }
 
     ngOnInit() {
-        this._router.events.subscribe((evt) => {
+        this.router.events.subscribe((evt) => {
             if (!(evt instanceof NavigationEnd)) {
                 return;
             }

@@ -8,14 +8,14 @@
         </div>
         <div class="row">
             <div class="col-3 p-0">Size: {{ (torrent.size || 0) | fileSize }}</div>
-            <div class="col-9">Health: <health [health]="health"></health><i *ngIf="health_checking" class="fa fa-spinner fa-spin"></i></div>
+            <div class="col-9">Health: <health [health]="health"></health><i *ngIf="healthChecking" class="fa fa-spinner fa-spin"></i></div>
         </div>
     </div>
     <div class="col-xs d-flex align-items-center">
         <button type="button" class="btn btn-sm btn-outline-tribler" (click)="play()">
             <div class="fa fa-play"></div>
         </button>
-        <button type="button" class="btn btn-sm btn-outline-tribler" (click)="open_download_modal(torrent)">
+        <button type="button" class="btn btn-sm btn-outline-tribler" (click)="openDownloadModal(torrent)">
             <div class="fa fa-arrow-down"></div>
         </button>
     </div>

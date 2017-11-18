@@ -10,37 +10,45 @@ import { TriblerService } from '../shared/tribler.service';
 export class DownloadDetailsComponent implements OnInit, OnDestroy {
     @Input() download: any;
 
-    constructor(private _triblerService: TriblerService) {
+    constructor(private triblerService: TriblerService) {
     }
 
     ngOnInit() {
-        this._triblerService.get_peers = true;
-        this._triblerService.get_pieces = true;
+        this.triblerService.getPeers = true;
+        this.triblerService.getPieces = true;
     }
 
     ngOnDestroy() {
-        this._triblerService.get_peers = false;
-        this._triblerService.get_pieces = false;
+        this.triblerService.getPeers = false;
+        this.triblerService.getPieces = false;
     }
 
-    get_state(peer) {
-        var state = "";
-        if (peer['optimistic'])
-            state += "O,";
-        if (peer['uinterested'])
-            state += "UI,";
-        if (peer['uchoked'])
-            state += "UC,";
-        if (peer['uhasqueries'])
-            state += "UQ,";
-        if (!peer['uflushed'])
-            state += "UBL,";
-        if (peer['dinterested'])
-            state += "DI,";
-        if (peer['dchoked'])
-            state += "DC,";
-        if (peer['snubbed'])
-            state += "S,";
-        return state + peer['direction']
+    getState(peer) {
+        let state = '';
+        if (peer['optimistic']) {
+            state += 'O,';
+        }
+        if (peer['uinterested']) {
+            state += 'UI,';
+        }
+        if (peer['uchoked']) {
+            state += 'UC,';
+        }
+        if (peer['uhasqueries']) {
+            state += 'UQ,';
+        }
+        if (!peer['uflushed']) {
+            state += 'UBL,';
+        }
+        if (peer['dinterested']) {
+            state += 'DI,';
+        }
+        if (peer['dchoked']) {
+            state += 'DC,';
+        }
+        if (peer['snubbed']) {
+            state += 'S,';
+        }
+        return state + peer['direction'];
     }
 }

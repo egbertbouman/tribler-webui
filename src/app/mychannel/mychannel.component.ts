@@ -11,42 +11,42 @@ import { TriblerService } from '../shared/tribler.service';
 })
 export class MyChannelComponent implements OnInit {
     mychannel;
-    channel_name = '';
-    channel_description = '';
+    channelName = '';
+    channelDescription = '';
 
-    constructor(private _triblerService: TriblerService,
-                private _modalService: NgbModal) { }
+    constructor(private triblerService: TriblerService,
+                private modalService: NgbModal) { }
 
     ngOnInit() {
-        this.refresh_mychannel();
+        this.refreshMyChannel();
     }
 
-    refresh_mychannel() {
-        this._triblerService.getMyChannel().subscribe(
+    refreshMyChannel() {
+        this.triblerService.getMyChannel().subscribe(
             data => this.mychannel = data,
             error => this.mychannel = undefined
         );
     }
 
     open_mychannel_modal(content) {
-        this._modalService.open(content);
+        this.modalService.open(content);
     }
 
     create_mychannel() {
-        if (this.channel_name !== undefined) {
-            this._triblerService.createMyChannel(this.channel_name, this.channel_description).subscribe(
-                data => this.refresh_mychannel(),
+        if (this.channelName !== undefined) {
+            this.triblerService.createMyChannel(this.channelName, this.channelDescription).subscribe(
+                data => this.refreshMyChannel(),
                 error => console.log(error)
             );
-        };
+        }
     }
 
     update_mychannel() {
-        if (this.channel_name !== undefined) {
-            this._triblerService.updateMyChannel(this.channel_name, this.channel_description).subscribe(
-                data => this.refresh_mychannel(),
+        if (this.channelName !== undefined) {
+            this.triblerService.updateMyChannel(this.channelName, this.channelDescription).subscribe(
+                data => this.refreshMyChannel(),
                 error => console.log(error)
             );
-        };
+        }
     }
 }

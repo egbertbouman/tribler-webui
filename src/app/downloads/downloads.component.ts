@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit, OnDestroy } from '@angular/core';
 
 import { TriblerService } from '../shared/tribler.service';
 
@@ -7,9 +7,10 @@ import { TriblerService } from '../shared/tribler.service';
     templateUrl: './downloads.component.html',
     styleUrls: ['./downloads.component.css']
 })
-export class DownloadsComponent implements OnInit {
+export class DownloadsComponent implements OnInit, OnDestroy {
     downloads = [];
     selected = [];
+    subscription;
 
     @HostBinding('class')
     someBaseClass = 'd-flex flex-column flex-grow';
@@ -18,7 +19,7 @@ export class DownloadsComponent implements OnInit {
     }
 
     ngOnInit() {
-        return this.triblerService.downloads.subscribe(downloads => {
+        this.subscription = this.triblerService.downloads.subscribe(downloads => {
             this.downloads = downloads;
 
             const selected = this.selected[0];
@@ -32,6 +33,10 @@ export class DownloadsComponent implements OnInit {
                 });
             }
         });
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
     }
 
     resumeDownload() {

@@ -55,7 +55,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let file of download.files">
+                    <tr *ngFor="let file of download.files | orderBy: 'name':false">
                         <td>{{ file.name }}</td>
                         <td>{{ file.size | fileSize:1 }}</td>
                         <td>{{ file.progress * 100 | number:'1.0-1' }}%</td>

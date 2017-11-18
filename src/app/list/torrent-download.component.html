@@ -29,7 +29,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let file of torrent_files">
+            <tr *ngFor="let file of torrent_files | orderBy: 'path':false">
                 <td>{{ file.path }}</td>
                 <td>{{ file.length | fileSize:1 }}</td>
                 <td><input type="checkbox" checked="checked" class="form-check-input ml-0" (change)="file.excluded = !file.excluded"></td>

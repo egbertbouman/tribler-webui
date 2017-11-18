@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
-import { FileSizePipe } from '../file-size.pipe';
-import { DownloadStatusPipe } from '../download-status.pipe';
 import { TriblerService } from '../shared/tribler.service';
 
 @Component({
@@ -19,32 +17,22 @@ export class DownloadsComponent implements OnInit {
     }
 
     ngOnInit() {
-        return Observable
-            .interval(2000)
-            .startWith(0)
-            .flatMap(() => {
-                return this._triblerService.getDownloads();
-            }).subscribe(downloads => {
-                this.downloads = downloads;
+        return this._triblerService.downloads.subscribe(downloads => {
+            this.downloads = downloads;
 
-                var selected = this.selected[0];
-                if (selected !== undefined) {
-                    var self = this;
-                    this.selected[0] = undefined;
-                    this.downloads.forEach(function (value, index) {
-                        if (value && selected.infohash === value.infohash) {
-                            value.files.sort(function (a: any, b: any) {
-                                var x = a.name.toLowerCase();
-                                var y = b.name.toLowerCase();
-                                return x < y ? -1 : x > y ? 1 : 0;
-                            });
-                            self.selected[0] = value;
-                        }
-                    });
-                }
-            });
+            var selected = this.selected[0];
+            if (selected !== undefined) {
+                var self = this;
+                this.selected[0] = undefined;
+                this.downloads.forEach(function (value, index) {
+                    if (value && selected.infohash === value.infohash) {
+                        self.selected[0] = value;
+                    }
+                });
+            }
+        });
     }
-
+    
     resumeDownload() {
         if (this.selected[0] === undefined) {
             return;

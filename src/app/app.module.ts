@@ -5,13 +5,14 @@ import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { HashLocationStrategy, Location, LocationStrategy } from '@angular/common';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { OrderModule } from 'ngx-order-pipe';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ChartsModule } from 'ng2-charts';
 
-import { FileSizePipe } from './file-size.pipe';
-import { AbbreviatePipe } from './abbreviate.pipe';
-import { DownloadStatusPipe } from './download-status.pipe';
+import { FileSizePipe } from './shared/file-size.pipe';
+import { AbbreviatePipe } from './shared/abbreviate.pipe';
+import { DownloadStatusPipe } from './shared/download-status.pipe';
 import { AppComponent } from './app.component';
 import { ChannelComponent } from './channel/channel.component';
 import { AllChannelComponent } from './allchannel/allchannel.component';
@@ -25,7 +26,7 @@ import { TorrentListItemComponent } from './list/torrent-list-item.component';
 import { HealthComponent } from './shared/health.component';
 import { ChannelListItemComponent } from './list/channel-list-item.component';
 import { ListComponent } from './list/list.component';
-import { RandomBackgroundColorDirective } from './random-background-color.directive';
+import { RandomBackgroundColorDirective } from './shared/random-background-color.directive';
 import { SearchbarComponent } from './search/searchbar.component';
 import { SearchresultsComponent } from './search/searchresults.component';
 import { TorrentDownloadComponent } from './list/torrent-download.component';
@@ -76,7 +77,8 @@ const routes: Routes = [
         InfiniteScrollModule,
         NgxDatatableModule,
         NgbModule.forRoot(),
-        ChartsModule
+        ChartsModule,
+        OrderModule
     ],
     providers: [Location,
         { provide: LocationStrategy, useClass: HashLocationStrategy }

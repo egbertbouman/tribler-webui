@@ -16,7 +16,7 @@ export class SearchresultsComponent implements OnInit {
 
     ngOnInit() {
         this.items = this._triblerService.searchResults;
-        this._triblerService.searchQuery$.subscribe(data => {
+        this._triblerService.searchQuery.subscribe(data => {
             // Reset itemsMaxShown
             this.list.itemsMaxShown = 20;
         });

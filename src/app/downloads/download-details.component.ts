@@ -1,7 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 
-import { FileSizePipe } from '../file-size.pipe';
-import { DownloadStatusPipe } from '../download-status.pipe';
 import { TriblerService } from '../shared/tribler.service';
 
 @Component({
@@ -9,13 +7,20 @@ import { TriblerService } from '../shared/tribler.service';
     templateUrl: './download-details.component.html',
     styleUrls: ['./download-details.component.css']
 })
-export class DownloadDetailsComponent implements OnInit {
+export class DownloadDetailsComponent implements OnInit, OnDestroy {
     @Input() download: any;
 
     constructor(private _triblerService: TriblerService) {
     }
 
     ngOnInit() {
+        this._triblerService.get_peers = true;
+        this._triblerService.get_pieces = true;
+    }
+
+    ngOnDestroy() {
+        this._triblerService.get_peers = false;
+        this._triblerService.get_pieces = false;
     }
 
     get_state(peer) {

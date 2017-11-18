@@ -1,7 +1,11 @@
 import { Http, RequestOptions } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { IntervalObservable } from "rxjs/observable/IntervalObservable";
 import { ReplaySubject } from 'rxjs/ReplaySubject';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/timeout';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
@@ -12,15 +16,22 @@ import { Download } from './download.model';
 
 declare var EventSource: any;
 
+
 @Injectable()
 export class TriblerService {
     private _api_base = '//localhost:8085';
     searchResults = [];
-    searchQuery$;
+    searchQuery;
+
+    downloads;
+    get_peers = false;
+    get_pieces = false;
 
     constructor(private _http: Http) {
         this.getEvents().subscribe();
-        this.searchQuery$ = new ReplaySubject(1);
+        this.getDownloads();
+        this.searchQuery = new ReplaySubject(1);
+        this.downloads = new ReplaySubject(1);
     }
 
     addType(objects: any[], type: string) {
@@ -30,11 +41,7 @@ export class TriblerService {
             objects[i].type = type;
     }
 
-    getRandomTorrents(): Observable<Torrent[]> {
-        return this._http.get(this._api_base + '/torrents/random?limit=50')
-            .map(res => res.json().torrents)
-            .do(items => this.addType(items, 'torrent'));
-    }
+    // Channels
 
     getChannel(id: string): Observable<Object> {
         return this._http.get(this._api_base + `/channels/discovered/${id}`)
@@ -73,17 +80,27 @@ export class TriblerService {
             .map(res => res.json().playlists)
             .do(items => this.addType(items, 'playlist'));
     }
+
+    // Torrents
+
+    getTorrentInfo(magnet): Observable<string> {
+        return this._http.get(this._api_base + `/torrentinfo?uri=${magnet}`)
+            .map(res => res.json().metainfo);
+    }
     getTorrentHealth(infohash: string){
         var timeout = 15;
         return this._http.get(this._api_base + `/torrents/${infohash}/health?timeout=${timeout}`)
             .timeout(timeout * 1000)
             .map(res => res.json().health);
     }
-
-    getDownloads(): Observable<Download[]> {
-        return this._http.get(this._api_base + '/downloads?get_pieces=1&get_peers=1')
-            .map(res => res.json().downloads);
+    getRandomTorrents(): Observable<Torrent[]> {
+        return this._http.get(this._api_base + '/torrents/random?limit=50')
+            .map(res => res.json().torrents)
+            .do(items => this.addType(items, 'torrent'));
     }
+
+   // Download management
+
     startDownload(destination: string, uri: string, hops: number, selected_files: string[]): Observable<string> {
         var body = `anon_hops=${hops}&safe_seeding=1&destination=${destination}&uri=${uri}`
         for (let file of selected_files) {
@@ -105,10 +122,8 @@ export class TriblerService {
         return this._http.delete(this._api_base + `/downloads/${infohash}`, options)
             .map(res => res.json().removed);
     }
-    getTorrentInfo(magnet): Observable<string> {
-        return this._http.get(this._api_base + `/torrentinfo?uri=${magnet}`)
-            .map(res => res.json().metainfo);
-    }
+
+    // My channel
 
     getMyChannel() {
         return this._http.get(this._api_base + '/mychannel')
@@ -127,6 +142,8 @@ export class TriblerService {
             .map(res => res.json());
     }
 
+    // Trustchain
+
     getTrustchainStatistics(): Observable<Object[]> {
         return this._http.get(this._api_base + '/multichain/statistics')
             .map(res => res.json().statistics);
@@ -136,18 +153,11 @@ export class TriblerService {
             .map(res => res.json().blocks);
     }
 
-    getVariables(): Observable<Object[]> {
-        return this._http.get(this._api_base + '/variables')
-            .map(res => res.json().variables);
-    }
+    // Search
 
     search(term: string): Observable<Download[]> {
-        this.searchQuery$.next(term);
-        // Clear the old search results
+        this.searchQuery.next(term);
         this.searchResults.length = 0;
-        while(this.searchResults.length > 0) {
-           this.searchResults.pop();
-        }
         return this._http.get(this._api_base + `/search?q=${term}`)
             .map(res => res.json());
     }
@@ -155,8 +165,19 @@ export class TriblerService {
         return this._http.get(this._api_base + `/search/completions?q=${encodeURIComponent(term)}`)
             .map(res => res.json().completions);
     }
+
+    // Keep track of new events/downloads
+
+    getDownloads() {
+        return IntervalObservable
+            .create(2000)
+            .startWith(0)
+            .flatMap(() => {
+                return this._http.get(this._api_base + `/downloads?get_pieces=${this.get_pieces ? 1 : 0}&get_peers=${this.get_peers ? 1: 0}`)
+                    .map(res => res.json().downloads);
+            }).subscribe(downloads => this.downloads.next(downloads));
+    }
     getEvents(): Observable<any[]> {
-        console.log('events');
         return Observable.create(observer => {
             const eventSource = new EventSource(this._api_base + '/events');
             eventSource.onmessage = x => observer.next(this._processEvent(JSON.parse(x.data)));
@@ -193,5 +214,12 @@ export class TriblerService {
                 console.log('torrent_discovered');
                 break;
         }
+    }
+
+    // Misc
+
+    getVariables(): Observable<Object[]> {
+        return this._http.get(this._api_base + '/variables')
+            .map(res => res.json().variables);
     }
 }

@@ -1,15 +1,11 @@
-{{ url }}
 <div class="d-flex flex-column flex-grow video-wrapper">
-  <video class="d-flex flex-column flex-grow bg-black" width="100%" height="100%" controls>
-      <source src="" type="video/mp4">
-      Your browser does not support HTML5 video.
-  </video>
+    <div *ngIf="download" class="text-white bg-black pl-1">
+        {{ download.status | downloadStatus}}
+        <span *ngIf="download.status === 'DLSTATUS_DOWNLOADING'">
+            <small>(&darr;{{ download.speed_down | fileSize:1 }}/s &uarr;{{ download.speed_up | fileSize:1 }}/s)</small>
+        </span>
+    </div>
+    <video #player class="d-flex flex-column flex-grow bg-black" width="100%" height="100%" controls controlsList="nodownload">
+        <source src="" type="video/mp4"> Your browser does not support HTML5 video.
+    </video>
 </div>
-
-<!-- <video id="my-video" class="video-js vjs-default-skin d-flex flex-column flex-grow video-js" controls preload="auto" data-setup="{}">
-    <source [src]="url" type='video/mp4'>
-    <p class="vjs-no-js">
-        To view this video please enable JavaScript, and consider upgrading to a web browser that
-        <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-    </p>
-</video> -->

@@ -29,11 +29,14 @@ export class TriblerService {
     getPeers = false;
     getPieces = false;
 
+    streams;
+
     constructor(private http: Http) {
         this.getEvents().subscribe();
         this.getDownloads();
         this.searchQuery = new ReplaySubject(1);
         this.downloads = new ReplaySubject(1);
+        this.streams = new ReplaySubject(1);
      }
 
     addType(objects: any[], type: string) {
@@ -104,6 +107,9 @@ export class TriblerService {
 
    // Download management
 
+    addStreamingEvent(type: string, autoPlay: boolean, download: object, fileindex?: number) {
+        this.streams.next({ type: type, autoPlay: autoPlay, download: download, fileindex: fileindex});
+    }
     startDownload(destination: string, uri: string, hops: number, selectedFiles: string[]): Observable<string> {
         let body = `anon_hops=${hops}&safe_seeding=1&destination=${encodeURIComponent(destination)}&uri=${encodeURIComponent(uri)}`;
         for (const file of selectedFiles) {

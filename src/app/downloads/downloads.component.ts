@@ -1,4 +1,5 @@
 import { Component, HostBinding, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { TriblerService } from '../shared/tribler.service';
 
@@ -15,7 +16,8 @@ export class DownloadsComponent implements OnInit, OnDestroy {
     @HostBinding('class')
     someBaseClass = 'd-flex flex-column flex-grow';
 
-    constructor(private triblerService: TriblerService) {
+    constructor(private triblerService: TriblerService,
+                private router: Router) {
     }
 
     ngOnInit() {
@@ -39,6 +41,14 @@ export class DownloadsComponent implements OnInit, OnDestroy {
         this.subscription.unsubscribe();
     }
 
+    streamDownload() {
+        if (this.selected[0] === undefined) {
+            return;
+        }
+        this.triblerService.addStreamingEvent('wait', true, this.selected[0]);
+        this.router.navigateByUrl('/videoplayer');
+    }
+
     resumeDownload() {
         if (this.selected[0] === undefined) {
             return;
@@ -58,13 +68,5 @@ export class DownloadsComponent implements OnInit, OnDestroy {
             return;
         }
         this.triblerService.removeDownload(this.selected[0].infohash, removeData).subscribe();
-    }
-
-    onSelect({ selected }) {
-        console.log('Select Event', selected, this.selected);
-    }
-
-    onActivate(event) {
-        console.log('Activate Event', event);
     }
 }

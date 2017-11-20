@@ -1,7 +1,7 @@
 <div class="header row align-items-center">
     <h3 class="flex-grow">Downloads</h3>
     <div class="align-middle">
-        <button type="button" class="btn btn-outline-tribler" title="Stream" [routerLink]="['/videoplayer', selected[0]?.infohash, 0]"><div class="fa fa-video-camera"></div></button>
+        <button type="button" class="btn btn-outline-tribler" title="Stream" (click)="streamDownload()"><div class="fa fa-video-camera"></div></button>
         <button type="button" class="btn btn-outline-tribler" title="Resume" (click)="resumeDownload()"><div class="fa fa-play"></div></button>
         <button type="button" class="btn btn-outline-tribler" title="Stop" (click)="stopDownload()"><div class="fa fa-stop"></div></button>
         <button type="button" class="btn btn-outline-tribler" title="Remove" (click)="removeDownload(false)"><div class="fa fa-remove"></div></button>
@@ -17,9 +17,7 @@
     [scrollbarV]="false"
     [scrollbarH]="true"
     [selected]="selected"
-    [selectionType]="'single'"
-    (activate)="onActivate($event)"
-    (select)='onSelect($event)'>
+    [selectionType]="'single'">
 
     <ngx-datatable-column prop="name" name="Name" [width]="200" [canAutoResize]="false"></ngx-datatable-column>
     <ngx-datatable-column prop="size" name="Size" [width]="100" [canAutoResize]="false">

@@ -9,7 +9,7 @@ h3 {
 .flex-grow {
     flex: 1 0 auto;
 }
-button {
+button, a {
     cursor: pointer;
 }
 .btn-outline-tribler,

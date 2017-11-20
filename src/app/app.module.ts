@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, RouteReuseStrategy } from '@angular/router';
 import { HashLocationStrategy, Location, LocationStrategy } from '@angular/common';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { OrderModule } from 'ngx-order-pipe';
@@ -20,6 +20,7 @@ import { AllChannelComponent } from './allchannel/allchannel.component';
 import { HomeComponent } from './home/home.component';
 import { DownloadsComponent } from './downloads/downloads.component';
 import { DownloadDetailsComponent } from './downloads/download-details.component';
+import { PiecesComponent } from './shared/pieces.component';
 import { MyChannelComponent } from './mychannel/mychannel.component';
 import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
 import { VideomenuComponent } from './videoplayer/videomenu.component';
@@ -43,8 +44,8 @@ const routes: Routes = [
     { path: 'mychannel', component: MyChannelComponent },
     { path: 'subscriptions', component: SubscriptionsComponent },
     { path: 'downloads', component: DownloadsComponent },
-    { path: 'videoplayer', component: VideoplayerComponent },
-    { path: 'videoplayer/:id1/:id2', component: VideoplayerComponent },
+    { path: 'videoplayer', component: VideoplayerComponent},
+    { path: 'videoplayer/:id1/:id2', component: VideoplayerComponent},
     { path: 'trustchain', component: TrustchainComponent },
 ];
 
@@ -56,6 +57,7 @@ const routes: Routes = [
         HomeComponent,
         DownloadsComponent,
         DownloadDetailsComponent,
+        PiecesComponent,
         MyChannelComponent,
         SubscriptionsComponent,
         VideomenuComponent,
@@ -85,7 +87,9 @@ const routes: Routes = [
         ChartsModule,
         OrderModule
     ],
-    providers: [Location,
+    providers: [
+        Location,
+        VideofilePipe,
         { provide: LocationStrategy, useClass: HashLocationStrategy }
     ],
     entryComponents: [

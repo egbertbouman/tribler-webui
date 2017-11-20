@@ -1,7 +1,7 @@
 // For compile-time type checking and code completion
 
 export interface Download {
-    files: string[];
+    files: object[];
     max_download_speed: number;
     vod_prebuffering_progress_consec: number;
     pieces?: string;

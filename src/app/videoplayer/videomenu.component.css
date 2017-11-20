@@ -11,7 +11,3 @@
 .videomenu .list-group-item a:hover {
     color: #e67300;
 }
-a.disabled {
-    pointer-events: none;
-    cursor: default;
- }

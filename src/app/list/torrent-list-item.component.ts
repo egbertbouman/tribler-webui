@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -18,6 +19,7 @@ export class TorrentListItemComponent implements OnInit {
     healthChecking = false;
 
     constructor(private triblerService: TriblerService,
+                private router: Router,
                 private modalService: NgbModal) {
     }
 
@@ -41,6 +43,11 @@ export class TorrentListItemComponent implements OnInit {
 
     play() {
         console.log('play ' + this.torrent.infohash);
+        this.triblerService.startDownload('', `magnet:?xt=urn:btih:${this.torrent.infohash}&dn=${this.torrent.name}`, 0, [])
+            .subscribe(() => {
+                this.triblerService.addStreamingEvent('wait', true, {infohash: this.torrent.infohash, files: []});
+                this.router.navigateByUrl('/videoplayer');
+            });
     }
 
     openDownloadModal(torrent) {

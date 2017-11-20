@@ -3,9 +3,13 @@
         <ng-template ngbTabContent>
             <table class="table">
                 <tbody>
-                    <tr>
+                    <!-- <tr>
                         <td class="text-white">Progress</td>
                         <td>{{ download.progress * 100 | number:'1.0-1' }}%</td>
+                    </tr> -->
+                    <tr>
+                        <td class="text-white">Progress</td>
+                        <td><pieces [pieces]="download.pieces"></pieces></td>
                     </tr>
                     <tr>
                         <td class="text-white">Name</td>
